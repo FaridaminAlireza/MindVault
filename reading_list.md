@@ -1,0 +1,18 @@
+- Work-Related Books
+  - 2023:
+    - Deep Work: Rules for Focused Success in a Distracted World,  Cal Newport
+  - 2024
+    - A Modern Introduction to Probability and Statistics, FM Dekking
+    - Calculus: A Complete Introduction: Teach Yourself, Hugh Neill
+    - Trigonometry: A Complete Introduction, Hugh Neill
+    - Chapters from Linear Algebra with Applications, Custom Binding UOttawa
+  - 2025
+    - January
+      - The Art of Explanation, Ros Atkins
+    - February
+      - Clean Architecture, Robert C. Martin
+      - Design Patterns in Modern C++20, Dmitri Nesteruk
+    - March
+      - Clean Code. Robert C. Martin
+    - April
+      - Think DSP, by B.Downey
