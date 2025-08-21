@@ -1,0 +1,55 @@
+grid = {(0,0):1, (2,3):5}  # only a few non-zero entries
+prefix2D = {}
+for (i,j), val in grid.items():
+    prefix2D[(i,j)] = val
+    prefix2D[(i,j)] += prefix2D.get((i-1,j),0) + prefix2D.get((i,j-1),0) - prefix2D.get((i-1,j-1),0)
+
+print(prefix2D)
+
+#Avoids creating a huge NxM array when most entries are zero.
+
+#Applications:
+
+# 1. Sum of any submatrix
+# -----------------------
+# # Compute sum of rectangle (x1,y1) to (x2,y2)
+def recct_sum(prefix2D, x1,y1, x2, y2):
+    sum_rect = prefix2D[x2][y2] - prefix2D[x1-1][y2] - prefix2D[x2][y1-1] + prefix2D[x1-1][y1-1]
+    return sum_rect
+# 2. Image processing (Integral Images)
+# -------------------------------------
+# # Compute sum of pixel intensities in a region
+pixels = [[1,2,3],[4,5,6],[7,8,9]]
+prefix = [[0]*len(pixels[0]) for _ in pixels]
+for i in range(len(pixels)):
+    for j in range(len(pixels[0])):
+        prefix[i][j] = pixels[i][j] + (prefix[i-1][j] if i>0 else 0) + (prefix[i][j-1] if j>0 else 0) - (prefix[i-1][j-1] if i>0 and j>0 else 0)
+
+# 3. Counting occurrences in a grid
+# ---------------------------------
+# # Count number of cells with value=1 in a rectangle
+binary_grid = [[1,0,1],[0,1,0],[1,0,1]]
+prefix = [[0]*len(binary_grid[0]) for _ in binary_grid]
+# Build prefix as above
+# Then use same formula as sum_rect
+
+# 4. Maximum sum submatrix
+# ------------------------
+# # For each rectangle (i,j)->(k,l), compute sum using 2D prefix
+# # Keep track of max_sum
+
+# 5. Dynamic range updates / queries
+# ---------------------------------
+# # Using 2D prefix sums as part of 2D Fenwick Tree or BIT
+# # After preprocessing, queries over rectangles in O(1)
+
+# 6. Path and obstacle problems
+# -----------------------------
+# # Count obstacles in a rectangular region of a map
+# # Convert obstacles to 1, empty cells to 0, then use prefix sum formula
+
+# 7. Heatmaps / statistical grids
+# -------------------------------
+# # Compute total/average value in a rectangular region
+# # Example: prefix sum of population density grid
+# # Then average = sum_rect / area

@@ -1,6 +1,6 @@
 # Personal Learning Notes  
 
-In this repository, I track my reading list and summarize mathematical concepts that I review in Jupyter notebooks.
+In this repository, I track my reading list and summarize mathematical and software concepts that I review.
 This is for my personal learning and reference.
 
 - The notes are organized in the **`mathematical_concepts`** folder.  

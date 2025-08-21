@@ -1,0 +1,44 @@
+arr = [1, -2, 3, -1, 5, -3]
+
+# Step 1: Build prefix sums
+prefix = [0] * len(arr)
+prefix[0] = arr[0]
+for i in range(1, len(arr)):
+    prefix[i] = prefix[i-1] + arr[i]
+
+# Step 2: Compute max sum of all possible ranges
+max_sum = float('-inf')
+for i in range(len(arr)):
+    for j in range(i, len(arr)):
+        current_sum = prefix[j] - (prefix[i-1] if i > 0 else 0)
+        max_sum = max(max_sum, current_sum)
+
+print("Maximum subarray sum:", max_sum)
+
+# Explaination:
+# prefix[j] is the sum from arr[0] to arr[j].
+# To get sum from i to j, we subtract prefix[i-1].
+# Iterate over all ranges (i, j) and update max_sum.
+
+
+
+# Efficent version (O(n))
+
+arr = [1, -2, 3, -1, 5, -3]
+
+prefix = [0] * len(arr)
+prefix[0] = arr[0]
+
+for i in range(1, len(arr)):
+    prefix[i] = prefix[i-1] + arr[i]
+
+min_prefix = 0   # sum before the current subarray
+max_sum = float('-inf')
+
+for i in range(len(arr)):
+    # Maximum sum of subarray ending at i
+    max_sum = max(max_sum, prefix[i] - min_prefix)
+    # Update the minimum prefix sum so far
+    min_prefix = min(min_prefix, prefix[i])
+
+print("Maximum subarray sum:", max_sum)

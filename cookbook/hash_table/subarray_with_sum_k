@@ -1,0 +1,12 @@
+arr = [1, 2, 3, -2, 5]
+target = 5
+prefix_sum = 0
+seen = {0: -1}  # prefix sum -> first index
+for i, num in enumerate(arr):
+    prefix_sum += num
+    if prefix_sum - target in seen:
+        print(f"Subarray from {seen[prefix_sum - target]+1} to {i} sums to {target}")
+    if prefix_sum not in seen:
+        seen[prefix_sum] = i
+
+# Finds subarrays with exact sum K in O(n), which is much faster than O(n²).
