@@ -1,0 +1,144 @@
+1. Monte Carlo Simulation
+-------------------------
+Purpose: Estimate probabilities, integrals, or expected values through random sampling.
+Core Idea: Generate random samples, simulate many outcomes, and use statistics to approximate results.
+Example (Estimate π in Python):
+    import random
+    N = 1_000_000
+    inside = 0
+    for _ in range(N):
+        x, y = random.random(), random.random()
+        if x*x + y*y <= 1:
+            inside += 1
+    pi_estimate = 4 * inside / N
+    print(pi_estimate)
+Next Steps:
+    - Importance sampling
+    - Variance reduction (antithetic variates)
+    - Markov Chain Monte Carlo (MCMC)
+
+2. Discrete-Event Simulation (DES)
+-----------------------------------
+Purpose: Model systems that change state at discrete events (queues, networks, manufacturing).
+Core Idea: Maintain an event list sorted by time; process events sequentially.
+Example (Simple queue in Python):
+    import heapq
+    events = [(0, 'arrival')]
+    queue, t = [], 0
+    while events:
+        t, event = heapq.heappop(events)
+        if event == 'arrival':
+            heapq.heappush(events, (t + 1.5, 'arrival'))
+            heapq.heappush(events, (t + 0.5, 'departure'))
+        elif event == 'departure':
+            pass
+Next Steps:
+    - Priority queue schedulers
+    - Queuing models (M/M/1, M/M/c)
+    - SimPy library
+
+3. Agent-Based Simulation (ABM)
+--------------------------------
+Purpose: Model complex systems where autonomous agents interact.
+Core Idea: Define simple agent rules; interactions produce emergent behavior.
+Example (Predator-prey dynamics):
+    rabbits = 50
+    foxes = 10
+    for day in range(100):
+        rabbits += rabbits * 0.1 - foxes * 0.05
+        foxes += foxes * 0.05 * (rabbits / 100) - 1
+        rabbits, foxes = max(0, rabbits), max(0, foxes)
+        print(day, rabbits, foxes)
+Next Steps:
+    - NetLogo
+    - Mesa (Python ABM framework)
+
+4. Molecular/Particle Simulation
+---------------------------------
+Purpose: Model physical systems of interacting particles.
+Core Idea: Integrate equations of motion for many interacting particles over time.
+Example (Simple particle motion):
+    import numpy as np
+    positions = np.random.rand(10, 2)
+    velocities = np.random.randn(10, 2)
+    dt = 0.01
+    for step in range(1000):
+        positions += velocities * dt
+Next Steps:
+    - Verlet or Runge-Kutta integration
+    - Lennard-Jones potential
+    - LAMMPS, HOOMD-blue
+
+5. System Dynamics
+-----------------
+Purpose: Model continuous feedback systems (population growth, economics, ecology).
+Core Idea: Use differential equations to describe rates of change.
+Example (Logistic growth):
+    r, K = 0.1, 1000
+    N = 10
+    ts, Ns = [], []
+    for t in range(1000):
+        N += r * N * (1 - N / K)
+        ts.append(t)
+        Ns.append(N)
+Next Steps:
+    - Stock-and-flow models
+    - Tools: Vensim, Stella
+    - Coupled ODEs
+
+6. Markov Chain Simulation
+--------------------------
+Purpose: Simulate systems that move between states with transition probabilities.
+Core Idea: Use stochastic matrix to update the state over many steps.
+Example (Weather model):
+    import numpy as np
+    P = np.array([[0.8, 0.2],
+                  [0.4, 0.6]])
+    state = 0
+    for day in range(10):
+        state = np.random.choice([0, 1], p=P[state])
+        print("Sunny" if state == 0 else "Rainy")
+Next Steps:
+    - Hidden Markov Models
+    - Markov Decision Processes
+    - Reinforcement learning
+
+7. Stochastic Differential Equations (SDE)
+-------------------------------------------
+Purpose: Model systems with continuous dynamics and random noise.
+Example: Geometric Brownian Motion (finance, stock prices)
+Next Steps:
+    - Euler-Maruyama method
+    - Ito calculus
+    - Python: sdeint, numpy
+
+8. Cellular Automata
+-------------------
+Purpose: Model spatially distributed systems with local rules.
+Example: Conway's Game of Life
+Next Steps:
+    - Rule-based simulations
+    - Traffic flow, forest fires
+    - Libraries: numpy, PyCA
+
+9. Event-Driven Particle Simulation
+-----------------------------------
+Purpose: Simulate large numbers of particles efficiently by predicting collision events.
+Core Idea: Compute next collision times instead of fixed time steps.
+Example: Hard-sphere gas simulations
+Next Steps:
+    - Event queue management
+    - Applications in physics and granular flows
+
+=========================
+LEARNING ROADMAP (Suggested Order)
+=========================
+1. Monte Carlo
+2. Markov Chains
+3. System Dynamics
+4. Discrete-Event Simulation
+5. Agent-Based Simulation
+6. Cellular Automata
+7. Molecular/Particle Simulation
+8. Event-Driven Particle Simulation
+9. Stochastic Differential Equations

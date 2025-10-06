@@ -1,0 +1,51 @@
+### What is Stability in Sorting?
+
+A sorting algorithm is said to be **stable** if elements with equal values appear
+ in the same order in the output as they did in the input.
+
+#### Example:
+
+Input: `[(3, 'a'), (1, 'b'), (3, 'c'), (2, 'd')]` sorted by the first element:
+
+* Stable sort output: `[(1, 'b'), (2, 'd'), (3, 'a'), (3, 'c')]`
+* Unstable sort output: `[(1, 'b'), (2, 'd'), (3, 'c'), (3, 'a')]`
+
+Here, the relative order of the two elements with value `3` is preserved in a stable sort.
+
+### Why Stability Matters
+
+1. Maintaining Extra Information:**
+   When elements carry additional information (like tuples), stability preserves the
+    original order of duplicates.
+
+2. Multi-key Sorting:
+   Stability is crucial when sorting by multiple keys sequentially 
+   (e.g., first by age, then by name).
+
+3. Consistency:
+    Stable sorting ensures predictable results for repeated values.
+
+
+When Stability Doesn’t Matter:
+If all elements are plain numbers and duplicates are indistinguishable,
+stability has no visible effect on the final sorted array.
+
+### Common Sorting Algorithms and Stability
+
+| Algorithm            | Stable? |
+| -------------------- | ------- |
+| Bubble Sort          | Yes     |
+| Insertion Sort       | Yes     |
+| Merge Sort           | Yes     |
+| Counting Sort        | Yes     |
+| Radix Sort           | Yes     |
+| Quick Sort (typical) | No      |
+| Heap Sort            | No      |
+| Selection Sort       | No      |
+
+### Notes:
+
+* Stability is often important in applications like databases,
+ multi-field sorting, and maintaining input order when keys are equal.
+* Some unstable algorithms can be made stable with modifications, 
+ but usually at extra space or performance cost.

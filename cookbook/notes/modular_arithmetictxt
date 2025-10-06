@@ -1,0 +1,46 @@
+Algebraic Operations in Modular Arithmetic (Example with Cycle Detection)
+
+1. Basics of Modular Arithmetic
+For integers a, b, C (C > 0):
+a ≡ b (mod C)
+means: C divides (a - b), or equivalently, a - b = k * C for some integer k.
+
+2. Allowed Algebraic Operations Modulo C
+If a ≡ b (mod C) and x ≡ y (mod C), then:
+
+1. Addition/Subtraction:
+   a + x ≡ b + y (mod C)
+   a - x ≡ b - y (mod C)
+
+2. Multiplication by integer:
+   k * a ≡ k * b (mod C)
+
+3. Multiplication of two congruences:
+   a * x ≡ b * y (mod C)
+
+4. Exponentiation:
+   a^n ≡ b^n (mod C)
+
+This allows us to operate algebraically on both sides
+while always reducing modulo C at the end.
+
+3. Example from Cycle Detection
+Consider the congruence in Floyd's cycle detection:
+L + s ≡ L + 2s (mod C)
+
+- Subtract L from both sides (allowed modulo C):
+
+  s ≡ 2s (mod C)
+
+- Subtract s from both sides:
+
+  0 ≡ s (mod C)
+
+- s must be a multiple of C
+- This shows slow and fast pointers meet after a number
+ of steps equal to the cycle length.
+- Division is not always allowed in modular arithmetic;
+  only divide if the divisor is coprime with the modulus.
+- Addition, subtraction, multiplication, and reducing both
+ sides are always safe.
+

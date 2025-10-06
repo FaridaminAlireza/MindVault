@@ -1,0 +1,162 @@
+Notes on NumPy Arrays, Limitations, and Usage
+
+1.  NumPy Arrays
+NumPy arrays (ndarrays) are the core data structure of the NumPy library.
+They provide efficient, typed, contiguous memory storage for numerical or
+binary data, allowing for vectorized operations and broadcasting.
+
+NumPy is primarily designed for numerical computations, but it can also
+store strings, binary data, and even Python objects when required.
+
+
+2. Creating NumPy Arrays
+Examples of array creation:
+
+    import numpy as np
+
+    # From a list
+    arr = np.array([1, 2, 3])
+
+    # From a nested list (matrix)
+    arr2d = np.array([[1, 2], [3, 4]])
+
+    # With specific type
+    arr_float = np.array([1, 2, 3], dtype=float)
+
+    # Using range and linspace
+    np.arange(0, 10, 2)     # [0, 2, 4, 6, 8]
+    np.linspace(0, 1, 5)    # [0. , 0.25, 0.5 , 0.75, 1.]
+
+
+3. NumPy Array Data Types (dtype)
+
+Each NumPy array has a fixed data type (`dtype`), defining how much memory
+each element takes and how it's interpreted.
+
+Examples:
+    int8, int16, int32, int64
+    float32, float64
+    complex64, complex128
+    bool
+    S<n>  → byte string of length n
+    U<n>  → Unicode string of length n
+    V<n>  → raw binary data (void type)
+    object → arbitrary Python objects
+
+---
+
+4. Strings in NumPy Arrays
+NumPy can store strings, but with key limitations:
+
+Example:
+    arr = np.array(["apple", "banana", "cherry"])
+    print(arr.dtype)  # <U6 (Unicode string, max length 6)
+
+Characteristics:
+- Fixed-length per element, determined by the longest string at creation.
+- All strings are padded or truncated to that length.
+- No native vectorized string methods (unlike pandas).
+
+Example of truncation:
+    arr[1] = "pineapple"
+    print(arr)  # ['apple' 'pineap' 'cherry']
+
+If you want dynamic-length strings, use dtype=object:
+    arr_obj = np.array(["apple", "banana"], dtype=object)
+    arr_obj[1] = "watermelon"  # Works fine, not truncated
+However, dtype=object arrays lose performance and vectorization benefits.
+
+
+5. Binary Data and Byte Strings
+NumPy can efficiently handle raw binary data.
+
+    arr_bytes = np.array([b'abc', b'def'])
+    print(arr_bytes.dtype)  # |S3 (byte strings, length 3)
+
+For raw binary data blocks (e.g., sensor data or file buffers):
+
+    arr_raw = np.array([b'\x01\x02', b'\x03\x04'], dtype='V2')
+    print(arr_raw.tobytes())  # b'\x01\x02\x03\x04'
+
+Dtypes for binary data:
+- `S<n>`: Fixed-size byte strings.
+- `V<n>`: Raw binary “void” data, used for low-level operations.
+
+
+6. Arithmetic Operations and Vectorization
+NumPy arrays support element-wise arithmetic and broadcasting:
+
+    arr = np.array([1, 2, 3, 4])
+    print(arr * 2)      # [2 4 6 8]
+    print(arr + 10)     # [11 12 13 14]
+
+Vectorization means operations are applied to entire arrays at once,
+without explicit Python loops, leading to major performance gains.
+
+
+7. Common Array Methods and Attributes
+
+    arr.ndim       → number of dimensions
+    arr.shape      → (rows, columns)
+    arr.size       → total number of elements
+    arr.dtype      → data type
+    arr.astype(t)  → convert to another dtype
+    arr.T          → transpose (for 2D arrays)
+    arr.flatten()  → flatten to 1D
+
+
+8. Major Limitations of NumPy Arrays
+
+1. Fixed Data Type
+   - All elements in a NumPy array share one dtype.
+   - Mixing types leads to upcasting (e.g., int + float → float).
+
+2. Strings Are Fixed-Length
+   - Unicode (`U<n>`) and byte (`S<n>`) dtypes are fixed-width.
+   - Longer strings get truncated; shorter ones are padded.
+
+3. No Native Variable-Length Text Handling
+   - For variable-length text or frequent string manipulation,
+     use Python lists or pandas Series.
+
+4. Limited Object Handling
+   - Arrays with dtype=object can hold arbitrary data but lose
+     performance, vectorization, and memory efficiency.
+
+5. No Built-in Missing Value Handling
+   - NumPy does not natively handle NaN for integers or None for general data.
+   - NaN is supported only for floating types.
+
+6. Less Flexible Than Lists
+   - Cannot easily append elements dynamically.
+   - Arrays have fixed shape and size once created (use np.resize or recreate).
+
+
+9. Working with Mixed Data
+You can use `dtype=object` to store mixed types, but with trade-offs:
+
+    arr_mixed = np.array([1, "text", 3.5], dtype=object)
+    print(arr_mixed)  # [1 'text' 3.5]
+
+This array loses vectorization — arithmetic operations will fail or
+fallback to Python’s slower dynamic dispatch.
+
+
+
+10. Practical Recommendations
+Use lists when:
+- You need heterogeneous data.
+- You frequently append or remove elements.
+- You work with strings or non-numeric types.
+
+Use NumPy arrays when:
+- You work with large, homogeneous numeric or binary data.
+- You need high-performance mathematical operations.
+- You require linear algebra, matrix operations, or broadcasting.
+
+
+11. Key Takeaways
+- NumPy arrays are designed for speed and numerical stability, not general data storage.
+- Strings and binary data are supported, but fixed-length and not dynamically resizable.
+- Prefer lists or pandas for text-heavy or heterogeneous data.
+- For performance-sensitive numeric work, NumPy arrays are the standard.

@@ -1,0 +1,11 @@
+# For sparse data indexed by non-sequential keys,
+#  dict can store running totals by key:
+
+data = {2025: 10, 2030: 20, 2040: 30}  # years -> value
+prefix = {}
+running = 0
+for key in sorted(data):
+    running += data[key]
+    prefix[key] = running
+
+print(prefix)  # cumulative sum by year

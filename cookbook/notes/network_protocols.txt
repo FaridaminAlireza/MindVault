@@ -1,0 +1,73 @@
+OSI Model: 7 Layers
+
+1. Physical Layer
+   - Explanation: Handles the transmission of raw bit streams over a physical medium (cables, fiber, radio waves).
+   - Function: Converts digital data into electrical, optical, or radio signals.
+   - Example: Ethernet cables, Wi-Fi, Hubs.
+
+2. Data Link Layer
+   - Explanation: Ensures reliable transmission of data frames between two nodes on the same network.
+   - Function: Error detection, frame synchronization, and MAC addressing.
+   - Example: Switches, Ethernet, PPP.
+
+3. Network Layer
+   - Explanation: Responsible for routing packets from source to destination across multiple networks.
+   - Function: Logical addressing (IP), routing, packet forwarding.
+   - Example: Routers, IP protocol.
+
+4. Transport Layer
+   - Explanation: Provides end-to-end communication and reliability between hosts.
+   - Function: Segmentation, error recovery, flow control.
+   - Example: TCP, UDP.
+
+5. Session Layer
+   - Explanation: Manages sessions or connections between applications.
+   - Function: Establishes, maintains, and terminates sessions.
+   - Example: NetBIOS, RPC.
+
+6. Presentation Layer
+   - Explanation: Translates, encrypts, or compresses data for the application layer.
+   - Function: Data formatting, encryption, compression.
+   - Example: SSL/TLS, JPEG, ASCII.
+
+7. Application Layer
+   - Explanation: Provides network services directly to end-user applications.
+   - Function: High-level protocols for communication and resource sharing.
+   - Example: HTTP, FTP, SMTP, WebSocket.
+
+# Protocol Details
+
+1. TCP/IP
+   - Layer: Network + Transport (TCP is Transport, IP is Network)
+   - Function: TCP provides reliable, ordered delivery of data. IP handles addressing and routing.
+   - Example: Most internet communication.
+
+2. FTP (File Transfer Protocol)
+   - Layer: Application
+   - Function: Transfers files between client and server over TCP.
+   - Port: 21
+   - Example: Uploading files to a web server.
+
+3. FTPS (FTP Secure)
+   - Layer: Application
+   - Function: FTP over SSL/TLS for encrypted file transfer.
+   - Port: 990 (implicit), 21 (explicit)
+   - Example: Securely transferring sensitive files.
+
+4. HTTPS (HyperText Transfer Protocol Secure)
+   - Layer: Application
+   - Function: HTTP over TLS/SSL for secure web communication.
+   - Port: 443
+   - Example: Online banking, secure websites.
+
+5. SMTP (Simple Mail Transfer Protocol)
+   - Layer: Application
+   - Function: Sending and routing emails between servers.
+   - Port: 25, 587, 465 (SSL)
+   - Example: Sending email from Gmail to another provider.
+
+6. WebSocket
+   - Layer: Application
+   - Function: Full-duplex, persistent communication between client and server.
+   - Port: 80 (ws), 443 (wss)
+   - Example: Real-time chat applications, live stock updates.

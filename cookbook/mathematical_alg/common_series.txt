@@ -1,0 +1,60 @@
+# ================================
+# Common Geometric and Other Series
+# Handy for CS / Complexity Analysis
+# ================================
+
+1. Arithmetic Series
+Sum of first n integers:
+    1 + 2 + 3 + ... + n = n(n + 1)/2 ≈ O(n^2)
+
+Sum of first n integers starting from a:
+    a + (a+1) + ... + (a+n-1) = n/2 * (2a + n - 1)
+
+Sum of squares:
+    1^2 + 2^2 + ... + n^2 = n(n + 1)(2n + 1)/6 ≈ O(n^3)
+
+Sum of cubes:
+    1^3 + 2^3 + ... + n^3 = [n(n + 1)/2]^2 ≈ O(n^4)
+
+
+2. Geometric Series
+Sum of first n terms of geometric series:
+    a + ar + ar^2 + ... + ar^(n-1) = a*(1 - r^n)/(1 - r), r ≠ 1
+
+Infinite geometric series (|r| < 1):
+    a + ar + ar^2 + ... = a/(1 - r)
+
+Special case (r=2):
+    1 + 2 + 4 + 8 + ... + 2^(n-1) = 2^n - 1 ≈ O(2^n)
+
+3. Harmonic Series
+Harmonic series (sum of reciprocals):
+    H_n = 1 + 1/2 + 1/3 + ... + 1/n ≈ ln(n) + γ
+    Where γ ≈ 0.5772 (Euler-Mascheroni constant)
+    Useful in algorithms like analysis of heap operations, amortized complexity
+
+4. Logarithmic Series
+Sum of logarithms:
+    1*log1 + 2*log2 + ... + n*logn ≈ O(n log n)
+    Often appears in divide and conquer recurrence relations
+
+6. Power Series
+Sum of i^k for small k (useful in analysis of nested loops):
+    i^0: n
+    i^1: n(n+1)/2
+    i^2: n(n+1)(2n+1)/6
+    i^3: [n(n+1)/2]^2
+
+7. Recurrence-Based Sums
+- Merge Sort recurrence:
+    T(n) = 2*T(n/2) + O(n) → Total O(n log n)
+- Binary search recurrence:
+    T(n) = T(n/2) + O(1) → Total O(log n)
+- Exponential recurrence:
+    T(n) = 2*T(n-1) + O(1) → Total O(2^n)
+
+8. Miscellaneous Useful Identities
+- Sum of first n odd numbers: 1 + 3 + 5 + ... + (2n-1) = n^2
+- Sum of first n even numbers: 2 + 4 + 6 + ... + 2n = n(n+1)
+- Telescoping sum: sum_{i=1}^{n} (1/i - 1/(i+1)) = 1 - 1/(n+1)
+- Geometric progression sum in algorithms: often used in doubling / halving loops

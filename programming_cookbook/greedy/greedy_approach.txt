@@ -1,0 +1,25 @@
+1. A Greedy Algorithm is a problem-solving approach that makes the locally 
+optimal choice at each step with the hope that it will lead to a globally
+optimal solution.
+
+Locally optimal choice: The best choice available right now.
+Globally optimal solution: The best overall solution for the entire problem.
+
+
+2. Greedy-choice property:
+
+Choosing locally optimal solutions leads to a global optimum.
+Example: Coin Change (if denominations allow it) —
+always take the largest coin ≤ remaining amount.
+
+Optimal substructure:
+Problem can be broken into smaller subproblems,
+and solutions to subproblems help solve the bigger problem.
+Example: Minimum spanning tree (MST), activity selection problem.
+
+3.Typical Steps in a Greedy Algorithm:
+ Sort or prioritize options if needed (e.g., by value/weight ratio).
+ Iterate through choices in order of priority.
+ Make the best local choice at each step.
+ Check constraints (e.g., capacity, non-overlapping activities).
+ Stop when done or when no more valid choices exist.
