@@ -1,0 +1,82 @@
+Asymptotic Notations:
+
+Asymptotic notations are mathematical tools used to describe the time complexity 
+or growth rate of algorithms. They help analyze how the running time or space 
+requirement of an algorithm changes with the input size n.
+
+There are three main asymptotic notations:
+
+1. Big O Notation — O(f(n))
+   Meaning: Describes the upper bound of an algorithm’s growth rate.
+   It gives the worst-case scenario — the maximum time or space an algorithm can take.
+
+   Example:
+   for (int i = 0; i < n; i++) {
+       cout << i;
+   }
+   This loop runs n times → O(n).
+
+   Another example:
+   for (int i = 0; i < n; i++) {
+       for (int j = 0; j < n; j++) {
+           cout << i << j;
+       }
+   }
+   This nested loop runs n * n times → O(n²).
+
+   Summary:
+   - Constant time → O(1)
+   - Linear time → O(n)
+   - Quadratic time → O(n²)
+   - Logarithmic time → O(log n)
+
+2. Omega Notation — Ω(f(n))
+   Meaning: Describes the lower bound of an algorithm’s growth rate.
+   It gives the best-case scenario — the minimum time an algorithm will take.
+
+   Example:
+   for (int i = 0; i < n; i++) {
+       cout << i;
+   }
+   This loop always runs n times → Ω(n).
+
+   Another example:
+   In a linear search of an element in an array:
+   - Best case: element is found at the first position → Ω(1)
+   - Worst case: element is at the end → O(n)
+
+3. Theta Notation — Θ(f(n))
+   Meaning: Describes the tight bound — when the algorithm’s running time is
+   both upper and lower bounded by the same function.
+   It represents the average or exact growth rate.
+
+   Example:
+   for (int i = 0; i < n; i++) {
+       cout << i;
+   }
+   This loop runs exactly n times in all cases → Θ(n).
+
+Comparison Summary
+| Notation | Represents | Meaning | Example |
+|-----------|-------------|----------|----------|
+| O(f(n)) | Upper bound | Worst-case | O(n²) |
+| Ω(f(n)) | Lower bound | Best-case | Ω(n) |
+| Θ(f(n)) | Tight bound | Average/exact | Θ(n log n) |
+
+Example Summary Table
+
+| Algorithm     | Best Case  | Worst Case  | Average Case  |
+|-------------- |------------|-------------|---------------|
+| Linear Search | Ω(1)       |    O(n)     | Θ(n)          |
+| Binary Search | Ω(1)       | O(log n)    | Θ(log n)      |
+| Bubble Sort   | Ω(n)       | O(n²)       | Θ(n²)         |
+| Merge Sort    | Ω(n log n) | O(n log n)  | Θ(n log n)    |
+
+Key Idea:
+Asymptotic notation ignores constants and lower-order terms 
+because they have little effect as n becomes large.
+
+Example:
+T(n) = 3n² + 5n + 10  →  O(n²)
+As n grows, n² dominates the growth, so constant factors
+ (3, 5, 10) are ignored.

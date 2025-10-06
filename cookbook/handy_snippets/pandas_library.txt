@@ -1,0 +1,312 @@
+ Notes on the Pandas Library
+
+Pandas is a powerful open-source Python library for data analysis and manipulation.
+It provides high-level data structures and tools designed to make working with
+structured data fast, easy, and expressive.
+Core components:
+- Series: 1D labeled array (like a column in a spreadsheet)
+- DataFrame: 2D labeled table of columns with potentially different types
+- Index: Labels for Series or DataFrame rows and columns
+
+2. Importing Pandas
+To use pandas, import it as:
+    import pandas as pd
+
+Pandas depends heavily on NumPy for numerical operations.
+
+
+3. Pandas Core Structures:
+
+A Series is a one-dimensional labeled array that can hold any data type.
+
+    import pandas as pd
+    s = pd.Series([10, 20, 30, 40], index=['a', 'b', 'c', 'd'])
+    print(s)
+    # a    10
+    # b    20
+    # c    30
+    # d    40
+
+    print(s['b'])   # 20
+
+A DataFrame is a 2D structure with rows and columns,
+ similar to a spreadsheet or SQL table.
+
+    data = {
+        'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 35],
+        'City': ['Paris', 'London', 'Berlin']
+    }
+
+    df = pd.DataFrame(data)
+    print(df)
+
+    # Output:
+    #       Name  Age    City
+    # 0    Alice   25   Paris
+    # 1      Bob   30  London
+    # 2  Charlie   35  Berlin
+
+
+4. Basic DataFrame Operations
+
+Accessing Data
+
+    df['Name']        # Access column as Series
+    df[['Name', 'Age']]  # Access multiple columns
+    df.iloc[0]         # Access row by index position
+    df.loc[1, 'City']  # Access cell by label
+
+Adding Columns
+    df['Country'] = ['France', 'UK', 'Germany']
+
+Removing Columns
+    df.drop('Age', axis=1, inplace=True)
+
+Adding Rows
+    df.loc[3] = ['David', 40, 'Rome', 'Italy']
+
+Removing Rows
+    df.drop(0, axis=0, inplace=True)
+
+
+5. Reading and Writing Data
+From CSV
+    df = pd.read_csv('data.csv')
+
+To CSV
+    df.to_csv('output.csv', index=False)
+
+From Excel
+    df = pd.read_excel('data.xlsx')
+
+From Dictionary or List
+    df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})
+
+
+6. Data Cleaning and Handling Missing Values
+
+    import numpy as np
+    df = pd.DataFrame({
+        'A': [1, 2, np.nan],
+        'B': [5, np.nan, 7],
+        'C': ['x', 'y', None]
+    })
+
+Detect Missing Values
+    df.isnull()
+
+Drop Missing Values
+    df.dropna()
+
+Fill Missing Values
+    df.fillna({'A': 0, 'B': df['B'].mean(), 'C': 'missing'})
+
+
+7. Data Filtering and Conditional Selection
+
+    df = pd.DataFrame({
+        'Name': ['Alice', 'Bob', 'Charlie', 'David'],
+        'Age': [25, 30, 35, 40],
+        'Salary': [50000, 60000, 70000, 80000]
+    })
+
+Boolean Filtering
+    df[df['Age'] > 30]
+
+Combining Conditions
+    df[(df['Age'] > 25) & (df['Salary'] < 80000)]
+
+Query Method
+    df.query('Age > 25 and Salary < 80000')
+
+
+8. Grouping and Aggregation
+
+Group By Column
+    grouped = df.groupby('Age')['Salary'].mean()
+
+Multiple Aggregations
+    df.groupby('Age').agg({'Salary': ['mean', 'max', 'min']})
+
+Resetting Index
+    grouped.reset_index(inplace=True)
+
+
+9. Sorting and Ranking
+
+Sort by Column
+    df.sort_values(by='Salary', ascending=False)
+
+Sort by Multiple Columns
+    df.sort_values(by=['Age', 'Salary'], ascending=[True, False])
+
+Rank Values
+    df['Rank'] = df['Salary'].rank(ascending=False)
+
+
+10. Merging, Joining, and Concatenation
+
+Merge (SQL-style join)
+    df1 = pd.DataFrame({'ID': [1, 2, 3], 'Name': ['Alice', 'Bob', 'Charlie']})
+    df2 = pd.DataFrame({'ID': [1, 2, 4], 'Salary': [50000, 60000, 70000]})
+
+    merged = pd.merge(df1, df2, on='ID', how='inner')
+
+Join on Index
+    df1.set_index('ID').join(df2.set_index('ID'), how='outer')
+
+Concatenation
+    pd.concat([df1, df2], axis=0)
+
+
+11. Applying Functions
+
+Element-wise Operation
+    df['Age'] = df['Age'].apply(lambda x: x + 1)
+
+Apply to Entire DataFrame
+    df.applymap(str)  # Convert all elements to string
+
+Apply Row or Column-wise
+    df.apply(sum, axis=0)  # Sum by column
+    df.apply(sum, axis=1)  # Sum by row
+
+
+12. Working with Dates and Times
+
+    df = pd.DataFrame({
+        'Date': pd.date_range('2024-01-01', periods=5, freq='D'),
+        'Value': [10, 20, 30, 40, 50]
+    })
+
+Extract Components
+    df['Year'] = df['Date'].dt.year
+    df['Month'] = df['Date'].dt.month
+    df['Day'] = df['Date'].dt.day
+
+Filter by Date
+    df[df['Date'] > '2024-01-03']
+
+
+13. Descriptive Statistics and Summary
+
+Basic Statistics
+    df.describe()
+
+Correlation and Covariance
+    df.corr()
+    df.cov()
+
+Value Counts
+    df['City'].value_counts()
+
+Unique Values
+    df['City'].unique()
+
+
+14. Pandas and NumPy Integration
+
+Pandas integrates closely with NumPy — many operations
+ delegate to NumPy under the hood.
+
+Examples:
+    df['Normalized'] = (df['Salary'] - np.mean(df['Salary'])) / np.std(df['Salary'])
+
+NumPy arrays can be directly converted to or from Pandas DataFrames:
+
+    np_arr = df.to_numpy()
+    df_from_np = pd.DataFrame(np_arr, columns=['Col1', 'Col2'])
+
+
+15. Limitations of Pandas
+
+1. Memory Usage
+   - Pandas loads all data into memory, which can be expensive for very large datasets.
+   - For big data, consider using Dask, Vaex, or Polars.
+
+2. Performance
+   - Slower than NumPy for purely numerical computation.
+   - Operations on object dtype (strings) are slower.
+
+3. Not Thread-Safe
+   - Pandas operations don’t natively support multithreading for performance gains.
+
+4. Type Inference
+   - Pandas may infer dtypes incorrectly; explicit casting is often needed.
+
+5. Missing Value Handling
+   - NaN can behave inconsistently across dtypes.
+
+
+16. Performance: Pandas apply() vs Python for loop
+
+When performing operations on data in Pandas, you have several choices:
+
+Use vectorized operations (fastest)
+Use `apply()` or `applymap()` (medium speed)
+Use Python for-loops (slowest)
+(Performance depends on the type of operation and data size.)
+
+General Performance Hierarchy
+   Fastest → Slowest (for large data):
+   NumPy Vectorized > Pandas Vectorized > apply() > for loop
+
+Example (for ~1 million rows):
+
+| Method     | Example                        | Approx Time |
+| ---------- | ------------------------------ | ----------- |
+| Vectorized | df['x'] * 2                    | ~0.02s      |
+| apply()    | df['x'].apply(lambda x: x * 2) | ~0.3s       |
+| for loop   | [x * 2 for x in df['x']]       | ~0.5s–1s    |
+
+
+Use Vectorized Operations — Best for arithmetic, logical, 
+or comparison operations.
+   Example:
+   df['result'] = df['x'] + df['y']
+
+Use apply() — When you need a custom function 
+applied element-wise or row-wise.
+    Example:
+    df['score'] = df.apply(lambda row: row['x'] + row['y']*2, axis=1)
+
+Use for-loops only when:
+    Data size is small (< 10,000 rows).
+    You must rely on external logic or complex state tracking.
+
+Data Transfer Considerations
+   If your data is originally in Python lists or dictionaries,
+   it’s not always faster to move it into a DataFrame just to use apply().
+
+Example:
+
+# Method 1: process before DataFrame
+processed = [custom_func(x) for x in raw_data]
+df = pd.DataFrame({'processed': processed})
+
+# Method 2: convert first, then apply
+df = pd.DataFrame({'raw': raw_data})
+df['processed'] = df['raw'].apply(custom_func)
+
+In most cases:
+* Small data → difference negligible.
+* Large data (>100k rows) → Method 1 (pure Python) might be faster
+ because apply adds Pandas overhead.
+
+
+17. Best Practices
+- Prefer vectorized operations over loops.
+- Avoid using apply() or for for numeric-heavy workloads — use NumPy.
+- Avoid using apply() for simple arithmetic (use direct vectorized math). 
+  (apply() is convenient but not a true performance optimization.) 
+- Explicitly set dtypes for large datasets.  
+- Use `.query()` or boolean indexing for filtering instead of `.loc[]` chains.  
+- When working with huge datasets, use chunked reads (`pd.read_csv(..., chunksize=n)`).
+
+
+18. Key Takeaways
+- Pandas is the go-to library for data manipulation and analysis.
+- Combines spreadsheet-like flexibility with NumPy’s performance.
+- Ideal for structured (tabular) data.
+- For extremely large or parallel workloads, consider Numba, Polars, or Dask.

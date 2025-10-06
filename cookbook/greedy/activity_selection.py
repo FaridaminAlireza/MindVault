@@ -23,3 +23,5 @@ finish = [2, 4, 6, 7, 9, 9]
 selected_activities = activity_selection(start, finish)
 print("Selected activities:", selected_activities)
 
+# Time complexity: O(n)
+# Space complexity: O(n)

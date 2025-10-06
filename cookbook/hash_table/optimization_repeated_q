@@ -11,5 +11,5 @@ for L,R in queries:
 
 # Works even if indices are not consecutive
 
-# If L = 0, then prefix[L-1] would be prefix[-1] (wrong).
-# So we handle it separately:
+# If L = 0, then prefix[L-1] would be prefix[-1],
+# so we handle it separately.

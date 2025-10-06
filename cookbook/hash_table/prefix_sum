@@ -25,7 +25,6 @@ print(prefix)  # Output: [1, 3, 6, 10, 15]
 
 
 # In case of sparse array
-
 arr = {0: 1, 100: 5, 1000: 10}  # sparse array
 prefix = {}
 running_sum = 0

@@ -12,3 +12,10 @@ def bubble_sort(arr):
 numbers = [64, 34, 25, 12, 22, 11, 90]
 bubble_sort(numbers)
 print(numbers)  # Output: [11, 12, 22, 25, 34, 64, 90]
+
+
+# Number of comparisons: n-1 + n-2 + ... + 1 = n(n-1)/2 ≈ O(n^2)
+# Number of swaps: Also up to O(n^2)
+
+# Time Complexity: O(n^2)
+# Space Complexity: O(1)

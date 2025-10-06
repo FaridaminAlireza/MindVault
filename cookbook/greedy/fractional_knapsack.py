@@ -31,3 +31,6 @@ values = [60, 100, 120]
 capacity = 50
 max_val = fractional_knapsack(weights, values, capacity)
 print("Maximum value (fractional knapsack):", max_val)
+
+# time complexity: O(n)
+# space complexity: O(n)

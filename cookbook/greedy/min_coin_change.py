@@ -18,3 +18,7 @@ amount = 63
 count, used_coins = greedy_coin_change(coins, amount)
 print("Minimum coins:", count)
 print("Coins used:", used_coins)
+
+# Time complexity: O(n)
+# Space complexity O(n)
+

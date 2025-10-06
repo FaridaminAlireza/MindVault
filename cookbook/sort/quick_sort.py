@@ -1,13 +1,3 @@
-def quick_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    pivot = arr[0]
-    left = [x for x in arr[1:] if x <= pivot]
-    right = [x for x in arr[1:] if x > pivot]
-    return quick_sort(left) + [pivot] + quick_sort(right)
-
-
-
 # Quick Sort
 # Quick Sort is a divide-and-conquer, comparison-based sorting algorithm.
 # How it works:
@@ -18,10 +8,30 @@ def quick_sort(arr):
 # Recursively apply quick sort to the two sub-arrays.
 # Combine the sorted sub-arrays with the pivot in the middle.
 
-# Key Points
 # Time Complexity:
 # Average: O(n log n)
 # Worst-case: O(n²) (occurs if pivot is always the smallest or largest element)
+# Each level (across all recursive calls at that depth) costs O(n).
+
+# There are about log n levels.
+# Therefore: O(n) (per level)× O(logn) (levels)= O(nlogn)
+
+# Space Complexity:
+# For creating new subarrays at each recursion, instead of doing in-place swaps:
+# Memory per recursion level = O(n)
+# Total memory = O(n log n) in average case, O(n²) in worst case
+
+
+# Example:
+#             [1,0,2,7,3,10,8]
+#             pivot=2
+#            /           \
+#       [1,0]           [7,3,10,8]
+#      pivot=0           pivot=8
+#     /     \          /       \
+#   [ ]     [1]      [7,3,]    [10]
+
+
 
 
 def quick_sort(arr):
@@ -63,4 +73,9 @@ def partition(arr, low, high):
 arr = [3, 6, 8, 10, 1, 2, 1]
 quick_sort_inplace(arr, 0, len(arr) - 1)
 print("Sorted array:", arr)
+
+# Space complexity of quick_sort_inplace 
+# O(log n) for recursive stack (best and average cases).
+# O(n) in the worst case due to recursion depth (if the array is extremely unbalanced).
+
 

@@ -59,7 +59,7 @@ r = Repeater('X', 5)
 print(len(r))       # 5
 print(r[2])         # 'X'
 
-# -----------------------------------
+
 
 class MagicDemo:
     # ⚙️ Lifecycle
@@ -147,7 +147,6 @@ print(list(reversed(m)))          # __reversed__
 print(m())                         # __call__
 with m as mm: print("inside with") # __enter__, __exit__
 
-# --------------------------------------------------
 
 import threading
 
@@ -177,7 +176,8 @@ from multiprocessing import Pool
 with Pool(4) as p:
     p.map(compute, range(4))
 
-# ------------------------------------------------------------------
+
+
 
 def count_up_to(n):
     i = 1

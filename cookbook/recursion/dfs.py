@@ -1,4 +1,5 @@
-# with recursion
+# DFS for graphs:
+# recursive appraoch 
 def dfs(graph, node, visited=None):
     if visited is None:
         visited = set()
@@ -8,6 +9,31 @@ def dfs(graph, node, visited=None):
             dfs(graph, neighbor, visited)
     return visited
 
+# iterative  appraoch 
+def dfs_iterative(graph, start):
+    visited = set()
+    stack = [start]
+
+    while stack:
+        node = stack.pop()
+        if node not in visited:
+            print(node)  # or store in a list if needed
+            visited.add(node)
+
+            # Add neighbors to stack (reverse if you want consistent order)
+            for neighbor in reversed(graph[node]):
+                if neighbor not in visited:
+                    stack.append(neighbor)
+
+    return visited
+
+#Time complexity: O(V + E)
+#Space complexity: O(V), the stack can hold V nodes in the worst case.
+
+
+
+# DFS for Trees
+# Recursive version
 # ------------------------------
 class Node:
     def __init__(self, data):
@@ -34,13 +60,7 @@ root.left.right = Node(5)
 
 dfs_recursive(root)  # Output: 1 2 4 5 3
 
-# ------------------------------
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
-
+# Recursive version 2
 def dfs_recursive(node):
     if node is None:
         return []
@@ -57,8 +77,7 @@ root.left.right = Node(5)
 result = dfs_recursive(root)
 print(result)  # Output: [1, 2, 4, 5, 3]
 
-# -------------------------------
-
+# Iterative version
 def dfs_iterative(root):
     if root is None:
         return
@@ -79,5 +98,6 @@ dfs_iterative(root)  # Output: 1 2 4 5 3
 
 # Recursive DFS is simple and elegant.
 # Iterative DFS avoids recursion depth issues.
-# Both can be adapted to graphs, but for graphs, you need a visited set to avoid cycles.
+# Both can be adapted to graphs, but for graphs,
+#  we need a visited set to avoid cycles.
 

@@ -1,14 +1,13 @@
----
-Top-Down vs Bottom-Up Dynamic Programming
 
----
+Top-Down vs Bottom-Up Dynamic Programming
 
 1. Top-Down DP (Memoization)
 
-Idea: Start with the original problem and recursively break it into smaller subproblems, storing results to avoid recomputation.
+Idea: Start with the original problem and recursively
+break it into smaller subproblems, storing results to
+avoid recomputation.
 
 Characteristics:
-
 * Recursion-based.
 * Solves subproblems only when needed.
 * Uses memoization (cache/dictionary/array).
@@ -32,26 +31,23 @@ print(fib_top_down(10))  # Output: 55
 ```
 
 Complexity:
-
 * Time: O(n)
 * Space: O(n) (memo + recursion stack)
 
 Visual: Think recursion tree where repeated calls are avoided by memoization.
 
----
 
 2. Bottom-Up DP (Tabulation)
 
-Idea: Solve smaller subproblems first, and use their solutions to build up to the original problem.
+Idea: Solve smaller subproblems first, and use their solutions
+to build up to the original problem.
 
 Characteristics:
-
 * Iterative approach.
 * Solves all subproblems up to n, even if some are not strictly needed.
 * Usually more space-efficient (can reduce stack usage).
 
 Example: Fibonacci (bottom-up)
-
 ```python
 def fib_bottom_up(n):
     if n == 0:
@@ -63,15 +59,12 @@ def fib_bottom_up(n):
 
 print(fib_bottom_up(10))  # Output: 55
 ```
-
 Complexity:
-
 * Time: O(n)
 * Space: O(1) (or O(n) if storing the whole table)
 
 Visual: Imagine filling a table from index 0 to n, then reading the last value.
 
----
 
 3. Comparison Table
 

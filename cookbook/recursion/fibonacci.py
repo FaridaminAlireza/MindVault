@@ -67,9 +67,23 @@ def fib(x):
 # └─ fib(n-2)
 #    ├─ ...
 
+# fib(4)
+#  ├── fib(3)
+#  │    ├── fib(2)
+#  │    │    ├── fib(1)
+#  │    │    └── fib(0)
+#  │    └── fib(1)
+#  └── fib(2)
+#       ├── fib(1)
+#       └── fib(0)
+
 
 # Number of calls grows roughly like 2^n.
 
 # So the time complexity is O(2^n), not O(n).
 
-# Space complexity is O(n) due to the recursion stac
+# Space complexity is O(n) due to the recursion stack.
+# Since the deepest recursion stack can be n times at any time.
+# In the above ex, fib(4) → fib(3) → fib(2) → fib(1)
+# total space = O(n * s). Since s is constant per call 
+# (stores local vars + return address), we usually drop it and just say O(n).

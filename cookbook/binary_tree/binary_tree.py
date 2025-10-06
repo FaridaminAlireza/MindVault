@@ -1,3 +1,5 @@
+# In a tree: The number of edges E = V - 1 
+# (since trees are acyclic and connected).
 
 class Node:
     def __init__(self, value):
@@ -43,9 +45,7 @@ postorder(root)  # 5 15 10
 
 
 
-
-
-
+#Recursive Approach
 def search_bst(node, key):
     if node is None:
         return False
@@ -63,6 +63,34 @@ root.right = Node(15)
 
 print(search_bst(root, 15))  # True
 print(search_bst(root, 7))   # False
+
+
+#Iterative Approach
+def search_iterative(root, x):
+    current = root
+    while current:
+        if current.val == x:
+            return True
+        elif x < current.val:
+            current = current.left
+        else:
+            current = current.right
+    return False
+
+
+
+# Time Complexity:
+# In the worst case, you may have to visit every node to find the target: O(n)
+# Best case: O(1) (if the element is at the root)
+# Average case: O(n) (no ordering guarantees)
+
+# Space Complexity:
+# This depends on how you traverse it:
+# Recursive DFS: Uses call stack. O(h), where h is the height of the tree. 
+# Worst case (skewed tree): O(n)
+# Best case (balanced tree): O(logn)
+# Iterative: O(1), it is Loop-based, more memory-efficient.
+
 
 
 class BST:
@@ -157,17 +185,4 @@ bst.inorder()   # 2 5 7 12 15 20
 
 
 
-from collections import deque
-def level_order(root):
-    if not root:
-        return []
-    res, queue = [], deque([root])
-    while queue:
-        level = []
-        for _ in range(len(queue)):
-            node = queue.popleft()
-            level.append(node.val)
-            if node.left: queue.append(node.left)
-            if node.right: queue.append(node.right)
-        res.append(level)
-    return res
+
