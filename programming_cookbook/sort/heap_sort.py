@@ -16,6 +16,7 @@
 
 # Step 3: Heapify the Root
 # Restore the max-heap property for the reduced heap.
+
 # Repeat Steps 2–3 until the heap size becomes 1.
 
 
@@ -47,13 +48,19 @@ def heap_sort(arr):
     n = len(arr)
 
     # Build a max heap
+
+    # It is more efficent to build the heap bottom up.
+    # n // 2 - 1 is index of last parent node in the binary tree.
+
     for i in range(n // 2 - 1, -1, -1):
-        heapify(arr, n, i)
+    # first -1 to include index 0,
+    # second -1 to reverse the order
+        heapify(arr, n, i) 
 
     # Extract elements one by one
     for i in range(n - 1, 0, -1):
         arr[i], arr[0] = arr[0], arr[i]  # swap
-        heapify(arr, i, 0)
+        heapify(arr, i, 0) 
 
 # Example usage
 arr = [12, 11, 13, 5, 6, 7]
@@ -63,3 +70,56 @@ print("Sorted array:", arr)
 
 # Time complexity: O(n log n)
 # Space complexity: O(n)
+
+
+
+arr = [3, 9, 2, 1, 4, 5]
+n = len(arr)  # 6
+# n // 2 - 1 = 6 // 2 - 1 = 2
+# Nodes indices 0, 1, 2 → non-leaf nodes
+# Nodes indices 3, 4, 5 → leaves → no heapify needed
+
+# Initial array (as tree):
+#             3
+#          /     \
+#        9         2
+#       /  \      /
+#      1    4    5
+# 
+# After heapifying index 2:
+#             3
+#          /     \
+#        9         5
+#       /  \      /
+#      1    4    2
+# 
+# Heapify index 1:
+#             3
+#          /     \
+#        9         5
+#       /  \      /
+#      1    4    2
+# 
+# Heapify index 0 (root):
+# After first swap
+#             9
+#          /     \
+#        3         5
+#       /  \      /
+#      1    4    2
+# 
+# After second swap:
+#             9
+#          /     \
+#        4         5
+#       /  \      /
+#      1    3    2
+# Final max heap
+#         9
+#      /     \
+#    4         5
+#   /  \      /
+#  1    3    2
+
+
+
