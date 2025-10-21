@@ -1,0 +1,11 @@
+def find_duplicates(arr):
+    unique_elemnts =set()
+    duplicates = []
+    for elm in arr:
+        if elm not in unique_elemnts:
+            unique_elemnts.add(arr)
+        else:
+            duplicates.append(elm)
+    
+    return duplicates
+

@@ -183,3 +183,53 @@ edges = [
 mst, total_weight = kruskal(vertices, edges)
 print("Edges in MST:", mst)
 print("Total weight:", total_weight)
+
+
+
+# Prim’s Algorithm
+# Steps (simple version using adjacency matrix):
+    # Pick a starting node.
+    # Maintain a set of nodes in MST.
+    # Repeat until all nodes are included:
+        # Find the minimum-weight edge connecting MST to a node outside MST.
+        # Add that edge and node to MST.
+
+
+def prim_mst(adj):
+
+    n = len(adj)  # number of nodes
+    selected = [False] * n  # track nodes included in MST
+    selected[0] = True       # start from node 0
+
+    mst = []  # list to store MST edges
+
+    for _ in range(n - 1):  # MST has n-1 edges
+        min_edge = float('inf')
+        u, v = -1, -1
+
+        # Find the minimum edge connecting selected nodes to unselected nodes
+        for i in range(n):
+            if selected[i]:
+                for j in range(n):
+                    if not selected[j] and adj[i][j] != 0 and adj[i][j] < min_edge:
+                        min_edge = adj[i][j]
+                        u, v = i, j
+
+        if u != -1 and v != -1:
+            mst.append((u, v, min_edge))
+            selected[v] = True
+
+    return mst
+
+
+# Example graph (adjacency matrix)
+adj = [
+    [0, 2, 0, 6, 0],
+    [2, 0, 3, 8, 5],
+    [0, 3, 0, 0, 7],
+    [6, 8, 0, 0, 9],
+    [0, 5, 7, 9, 0]
+]
+
+mst = prim_mst(adj)
+print("Edges in MST:", mst)
