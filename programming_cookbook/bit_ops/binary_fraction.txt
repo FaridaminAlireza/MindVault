@@ -1,0 +1,213 @@
+# In decimal (base-10), each place after the decimal point means a fraction with a power of 10:
+# | Digit position | Value  |
+# | -------------- | ------ |
+# | 0.1            | 1/10   |
+# | 0.01           | 1/100  |
+# | 0.001          | 1/1000 |
+
+# In binary (base-2), each place after the binary point means a fraction with a power of 2
+# | Binary digit position | Value         |
+# | --------------------- | ------------- |
+# | 0.1                   | 1/2 = 0.5     |
+# | 0.01                  | 1/4 = 0.25    |
+# | 0.001                 | 1/8 = 0.125   |
+# | 0.0001                | 1/16 = 0.0625 |
+
+
+# Ex: 
+# 0.101₂ = 1/2 + 0/4 + 1/8 = 0.625₁₀
+# 0.1₂ = (1 × 1/2) = 0.5₁₀
+
+
+
+# -- How to Convert a Decimal Fraction (like 0.2) to Binary --
+# You can use a multiply-by-2 method.
+
+# Algorithm:
+# Multiply the fraction by 2.
+# The integer part (0 or 1) becomes the next binary digit.
+# Keep only the fractional part and repeat.
+
+# | Step | Fraction × 2  | Integer Part | New Fraction | Binary Bits |
+# | ---- | ------------- | ------------ | ------------ | ----------- |
+# | 1    | 0.2 × 2 = 0.4 | 0            | 0.4          | 0.0...      |
+# | 2    | 0.4 × 2 = 0.8 | 0            | 0.8          | 0.00...     |
+# | 3    | 0.8 × 2 = 1.6 | 1            | 0.6          | 0.001...    |
+# | 4    | 0.6 × 2 = 1.2 | 1            | 0.2          | 0.0011...   |
+
+
+
+# Now notice — we’re back to 0.2 again at step 4!
+# That means the pattern repeats forever.
+
+# So: 0.2 in binary = 0.0011 0011 0011...
+# Repeating 0011 sequence — that’s why 0.2 is not
+# exact in binary.
+
+
+
+# | Step | Decimal × 2   | Integer part | Fraction left | Binary so far   |
+# | ---- | ------------- | ------------ | ------------- | --------------- |
+# | 1    | 0.9 × 2 = 1.8 | 1            | 0.8           | 0.1             |
+# | 2    | 0.8 × 2 = 1.6 | 1            | 0.6           | 0.11            |
+# | 3    | 0.6 × 2 = 1.2 | 1            | 0.2           | 0.111           |
+# | 4    | 0.2 × 2 = 0.4 | 0            | 0.4           | 0.1110          |
+# | 5    | 0.4 × 2 = 0.8 | 0            | 0.8           | 0.11100         |
+# | 6    | 0.8 × 2 = 1.6 | 1            | 0.6           | 0.111001        |
+# | …    | …             | …            | …             | pattern repeats |
+
+
+# -- Mathematical Intuition: --
+# 0.9 = 9/10 = 9 / (2 * 5)
+# * In binary, only denominators that are powers of 2 terminate.
+# * Denominator 10 = 2 * 5 → factor 5 causes repetition.
+# * Multiply-by-2 method systematically extracts each binary digit.
+
+# General Proof for Any Fraction 0<f<1:
+# Let f = 0.d1 d2 ..._10 (decimal fraction)
+# and f binary = b1 ⋅2^−1+ b2 ⋅2^−2+ b3 ⋅2^−3+…
+# At each step, multiply by 2.
+# Integer part = next binary digit
+# Fractional part = new fraction for next step
+# After n steps:
+# f = b12^-1 + b22^-2 + ... + bn*2^-n + remaining fraction
+# Repeating this infinitely gives exact binary expansion for
+# fractions with denominators not powers of 2.
+
+
+# -- Fraction Repeat --
+# In decimal, fractions that have denominators made up of powers of 2
+# and/or 5 are finite (e.g. 1/2, 1/5, 1/4, 1/8).
+
+# In binary, fractions that have denominators made up of powers of 2
+# are finite (e.g. 1/2, 1/4, 1/8). Everything else 
+# (like 1/5 = 0.2, 1/3, etc.) repeats infinitely.
+
+# Ex 
+# | Fraction | Decimal | Binary       | Type      |
+# | -------- | ------- | ------------ | --------- |
+# | 1/2      | 0.5     | 0.1          | Finite    |
+# | 1/4      | 0.25    | 0.01         | Finite    |
+# | 1/8      | 0.125   | 0.001        | Finite    |
+# | 1/5      | 0.2     | 0.0011 0011… | Repeating |
+# | 1/3      | 0.3333… | 0.0101 0101… | Repeating |
+
+
+# | Decimal | Binary            | Reason                          |
+# | ------- | ----------------- | ------------------------------- |
+# | 0.5     | 0.1               | exact (1/2 = 2⁻¹)               |
+# | 0.25    | 0.01              | exact (1/4 = 2⁻²)               |
+# | 0.125   | 0.001             | exact (1/8 = 2⁻³)               |
+# | 0.2     | 0.0011 0011 0011… | repeating (1/5 not power of 2)  |
+# | 0.1     | 0.0001 1001 1001… | repeating (1/10 not power of 2) |
+
+
+
+# -- Why This Causes Floating-Point “Inexactness --
+
+# when  print(0.1 + 0.2): 
+# 0.1 ≈ 0.00011001100110011001101₂
+# 0.2 ≈ 0.00110011001100110011010₂
+# 0.1 + 0.2 ≈ 0.01001100110011001100110₂
+# Which is ≈ 0.30000000000000004₁₀
+
+# Tiny errors can cause incorrect totals,
+# rounding issues, or regulatory problems.
+
+# That’s not an error in the CPU —
+# it’s the mathematical limitation of representing
+# non–power-of-two fractions in binary.
+
+# x = 0.1 + 0.2
+# if x == 0.3:   # often False
+#     print("Equal")
+
+# A Real case was Patriot Missile failure (1991) — 
+# a timing calculation using a floating-point approximation
+# caused the missile system to miss a target.
+
+# Floating-point inexactness becomes a problem when:
+    # 1. You require exact decimal precision (money, IDs, counts).
+    # 2. You perform many iterative calculations (ex in  simulation) 
+    # where rounding errors accumulate.
+    # 3. Your logic assumes exact equality of floating-point values.
+    # 4. Tiny errors get amplified in safety-critical 
+    # or high-precision applications.
+
+# -------------------------------------------------------------------
+
+# Storing Fractional Binary Numbers in Computers
+
+# Representation
+
+# A fractional binary number like:
+# 101011.001101
+# is stored in a computer using floating-point representation 
+# (IEEE 754 standard), not as a literal integer and fractional part.
+
+# Step 1: Convert to decimal if needed
+# * Integer part: 101011 -> 43
+# * Fractional part: .001101 -> 0.203125
+# * Decimal value: 43.203125
+
+# Step 2: Normalize
+# Floating-point stores numbers in the form:
+# value = (-1)^sign * 1.mantissa * 2^exponent
+
+# * Move the binary point to leave 1 digit before the dot:
+#   101011.001101 -> 1.01011001101 × 2^5
+# * Mantissa: 01011001101… (fill remaining bits with 0 if needed)
+# * Exponent: 5
+# * Sign: 0 for positive, 1 for negative
+
+# Floating-point Fields (Single Precision, 32 bits)
+
+# | Field    | Size    | Description                                             |
+# | -------- | ------- | ------------------------------------------------------- |
+# | Sign     | 1 bit   | 0 = positive, 1 = negative                              |
+# | Exponent | 8 bits  | Stores exponent with bias (to allow negative exponents) |
+# | Mantissa | 23 bits | Fractional part of the number (after leading 1)         |
+
+# Exponent Bias
+# * Single precision (32-bit): bias = 127
+# * Double precision (64-bit): bias = 1023
+
+# Stored exponent = Actual exponent + Bias
+# Example: exponent = 5 -> stored exponent = 5 + 127 = 132 -> 10000100 in binary
+
+# Possible stored exponent values:
+
+# * Single precision: 0 to 255
+#   * 0 -> reserved for denormalized numbers
+#   * 1–254 -> normal numbers
+#   * 255 -> reserved for ±infinity and NaN
+
+# 3. Handling Negative Numbers
+# * Negative numbers are not stored as 2’s complement in floating-point format.
+# * Instead, the sign bit is set to 1; mantissa and exponent remain the same.
+
+# 4. Example
+#    Binary: 101011.001101 -> normalize -> 1.01011001101 × 2^5
+
+# * Sign: 0 (positive)
+# * Exponent: 5 + 127 = 132 -> 10000100
+# * Mantissa: 01011001101000000000000
+
+# Stored 32-bit representation (single precision):
+# 0 10000100 01011001101000000000000
+
+#---------------------------------------------
+
+# Negative integers are usually stored in 2’s complement form.
+# How 2’s complement works:
+# Start with the binary of the positive number.
+# Invert all bits (1’s complement).
+# Add 1 → you get the negative number.
+
+
+# Floating-Point Numbers
+# Negative floating-point numbers are not stored in 2’s complement.
+# Instead, a dedicated sign bit is used:
+# 0 → positive
+# 1 → negative
+

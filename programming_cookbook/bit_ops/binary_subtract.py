@@ -99,3 +99,61 @@ print(nbits) # bit_size = 4
 print(bitwise_subtract(10,5,nbits))
 print(bitwise_subtract(10, negate_num(5,nbits),nbits))
 print(bitwise_subtract(10, negate_num(6,nbits),nbits))
+
+
+
+# conceptually, floating-point subtraction (A - B) 
+# is handled under the hood in a way very similar to addition,
+# but there are subtle details due to floating-point representation.
+
+# -- Floating-point representation
+# In IEEE 754 (common floating-point standard), a number is represented as:
+
+# (-1)^s * 1.m * 2^e
+
+# * s = sign bit
+# * m = mantissa (or significand)
+# * e = exponent
+
+
+# -- Subtraction as addition of a negative
+
+# subtraction is performed as addition:
+# A - B ≡ A + (-B)
+
+# You first flip the sign bit of B to get -B.
+# Then perform floating-point addition of A + (-B).
+
+# Steps in floating-point addition/subtraction
+
+# -- Align exponents:
+
+#    * Suppose A = 1.m_1 * 2^e_1 and B = 1.m_2 * 2^e_2.
+#    * Shift the mantissa of the smaller exponent so both numbers have the same exponent.
+
+# -- Add or subtract mantissas:
+#  Now it’s essentially integer addition/subtraction on the mantissas.
+#  If signs are different (for subtraction), you subtract the mantissas.
+
+# 6. Normalize the result:
+# Shift the mantissa left/right to ensure it’s in the correct range
+# (usually 1.0 ≤ mantissa < 2.0).
+# Adjust the exponent accordingly.
+
+# 7. Round the result:
+# Round the final mantissa to fit the available bits 
+# (e.g., 23 bits for single precision).
+
+# Important caveats
+# Precision loss: If A and B are very close, 
+# significant digits may cancel, leading to catastrophic cancellation.
+# Overflow/underflow: Adding very large or very small numbers 
+# may exceed the representable range.
+
+
+# So, under the hood:
+# A - B becomes A + (-B)
+# but the actual computation works on aligned exponents
+# and integer-like mantissas, not on the floating-point
+# numbers as a monolithic entity.
+
