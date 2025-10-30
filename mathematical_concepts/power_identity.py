@@ -75,6 +75,3 @@ print(power_via_identity(9, 0.5))  # Expected output: 3.0
 # - math.log(a) computes the natural logarithm ln(a)
 # - math.exp(x) computes e^x
 # - Multiplying b * math.log(a) and exponentiating gives the same result as a ** b
-
-
-
