@@ -75,9 +75,14 @@ Power of a Point (Tangent–Secant): (Tangent length)² =
 
 ANGLE RELATIONSHIPS
 Inscribed Angle Theorem: Inscribed angle = 1/2 × intercepted arc.
-Central vs Inscribed: Central angle = 2 × inscribed angle intercepting the same arc.
+
+Central vs Inscribed: 
+Central angle = 2 × inscribed angle intercepting the same arc.
+
 Angles in the Same Segment: Angles standing on the same arc are equal.
+
 Angle in a Semicircle: Always 90°.
+
 Exterior Angle (formed by secants): 
 Exterior angle = 1/2 × (difference of intercepted arcs).
 

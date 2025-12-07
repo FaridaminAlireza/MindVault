@@ -1,381 +1,400 @@
 """
-Variance, covariance, and covariance functions
+covariance and covariance matrices
 
-1. Basic definitions
+────────────────────────────────────────
+COVARIANCE — WHAT AND WHY
+────────────────────────────────────────
 
-Variance of a random variable X:
-Var(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2.
-Intuition: average squared deviation from the mean.
+Covariance measures 
+how two random variables move together.
 
-Covariance of two random variables X and Y:
-Cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y].
-Intuition: measures linear co-movement. If positive, 
-X and Y tend to be above/below their means together;
-if negative, when one is above its mean the other tends
-to be below.
+Let X and Y be random variables.
+The **population covariance** is:
 
-Correlation:
-Corr(X,Y) = Cov(X,Y) / (sqrt(Var(X)) sqrt(Var(Y))).
-Range: [-1, 1]. Dimensionless.
+Cov(X, Y) = E[(X − μ_X)(Y − μ_Y)]
 
-2. Simple numeric example (step by step)
-   Take paired observations (population view):
-   X = [1, 2, 3]
-   Y = [2, 4, 5]
+Where:
 
-Step A — compute means exactly:
-mean_X = (1 + 2 + 3) / 3 = 6 / 3 = 2.
-mean_Y = (2 + 4 + 5) / 3 = 11 / 3.
+* μ_X = E[X] (mean of X)
+* μ_Y = E[Y] (mean of Y)
 
-Step B — compute deviations and products 
-(use fractions for exactness):
-For i=1: (x1 - mean_X) = 1 - 2 = -1.
-(y1 - mean_Y) = 2 - 11/3 = (6/3 - 11/3) = -5/3.
-product1 = (-1) * (-5/3) = 5/3.
+Interpretation:
 
-For i=2: (x2 - mean_X) = 2 - 2 = 0.
-(y2 - mean_Y) = 4 - 11/3 = (12/3 - 11/3) = 1/3.
-product2 = 0 * (1/3) = 0.
+* Cov > 0 → 
+When X is above average, 
+Y tends to be above average 
+→ positive relationship
 
-For i=3: (x3 - mean_X) = 3 - 2 = 1.
-(y3 - mean_Y) = 5 - 11/3 = (15/3 - 11/3) = 4/3.
-product3 = 1 * (4/3) = 4/3.
+* Cov < 0 → When X is above average,
+Y tends to be below average →
+negative relationship
 
-Step C — sum products:
-sum_products = 5/3 + 0 + 4/3 = (5/3 + 4/3) = 9/3 = 3.
+* Cov ≈ 0 → No linear relationship
 
-Step D — population covariance (divide by N = 3):
-Cov(X,Y) = sum_products / 3 = 3 / 3 = 1.
+Unit:
 
-Step E — population variances:
-Var(X) = E[(X-mean_X)^2] = 
-((-1)^2 + 0^2 + 1^2) / 3 =
-(1 + 0 + 1) / 3 = 2/3 ≈ 0.6666667.
-Var(Y) = ((-5/3)^2 + (1/3)^2 + (4/3)^2) / 3
-= ((25/9) + (1/9) + (16/9)) / 3
-= (42/9) / 3 = (14/3) / 3 = 14/9 ≈ 1.5555556.
+* The units of covariance are 
+the product of units of X and Y 
+(e.g. meters * seconds), so 
+raw covariance can be difficult
+to interpret directly.
 
-Step F — correlation:
-Corr(X,Y) = Cov(X,Y) / sqrt(Var(X) Var(Y))
-= 1 / sqrt((2/3) * (14/9))
-= 1 / sqrt(28/27)
-= 1 / (sqrt(28)/sqrt(27))
-= sqrt(27) / sqrt(28)
-= (sqrt(9*3)) / (sqrt(4*7))
-= (3 * sqrt(3)) / (2 * sqrt(7))
-Numerically: sqrt(28/27) ≈ sqrt(1.037037) ≈ 1.018370
-Corr ≈ 1 / 1.018370 ≈ 0.98198 (approx).
+────────────────────────────────────────
+DERIVATION OF SAMPLE COVARIANCE FORMULA
+────────────────────────────────────────
 
-(Notes: above used population formulas dividing by N.
-Sample covariance/variance commonly divide by N-1;
-adjust if you want sample estimates.)
+Given n paired samples (x_i , y_i) for i = 1..n:
 
-3. Covariance function for a stochastic process
-   Let (X_t)_{t in T} be a stochastic process (index set T could be time R+ or integers).
-   Define the covariance function C(s,t) as:
-   C(s, t) = Cov(X_s, X_t) = E[(X_s - E[X_s])(X_t - E[X_t])] = E[X_s X_t] - E[X_s] E[X_t].
+We estimate covariance using:
 
-Important properties of a covariance function C(s,t):
+Cov(X, Y) ≈ (1 / (n − 1)) * Σ[(x_i − x̄)(y_i − ȳ)]
 
-* Symmetry: C(s,t) = C(t,s).
-* Positive semidefinite: for any finite set of times t1,...,tn and any real numbers a1,...,an,
-  sum_{i,j} a_i a_j C(t_i, t_j) >= 0.
-* Variance at time t is the diagonal: Var(X_t) = C(t,t).
-* If the process has zero mean (E[X_t]=0 for all t), then C(s,t) = E[X_s X_t].
+Why (n − 1) instead of n?
 
-A common special case: stationary process (strict or weak). For weak stationarity:
-mean is constant and covariance depends only on lag h = t - s:
-C(s,t) = γ(h) where γ(h) = Cov(X_t, X_{t+h}).
+* Using n → biased estimator for finite samples
+* (n − 1) corrects this via 
+Bessel’s correction to 
+keep expected covariance unbiased
 
-4. Example: covariance function of Brownian motion (standard)
-   Definition of standard Brownian motion (B_t)_{t >= 0}:
+Mean subtraction is crucial because:
 
-* B_0 = 0 (almost surely).
-* Continuous paths.
-* Independent increments: for 0 <= s < t, increment B_t - B_s is independent of the past up to time s.
-* Gaussian increments with mean 0 and variance equal to the increment length:
-  B_t - B_s ~ Normal(0, t - s).
-* In particular Var(B_t) = t and E[B_t] = 0.
+* It centers the data
+* Measures co-variability from 
+the "average behavior" 
+rather than absolute values
 
-Goal: compute C(s,t) = Cov(B_s, B_t) for s, t >= 0.
+────────────────────────────────────────
+SELF-COVARIANCE = VARIANCE
+────────────────────────────────────────
 
-Step-by-step derivation (assume w.l.o.g. t >= s; if not swap):
-Start with Cov(B_s, B_t) = E[B_s B_t] - E[B_s] E[B_t].
-Brownian has zero mean, so E[B_s] = 0 and E[B_t] = 0. Thus
-Cov(B_s, B_t) = E[B_s B_t].
+Cov(X, X) = Var(X)
 
-Use decomposition for t >= s:
-B_t = B_s + (B_t - B_s).
-Then
-E[B_s B_t] = E[B_s (B_s + (B_t - B_s))]
-= E[B_s^2] + E[B_s (B_t - B_s)].
+Thus covariance generalizes variance.
 
-By independent increments, B_s is independent of (B_t - B_s). Also E[B_t - B_s] = 0.
-Therefore E[B_s (B_t - B_s)] = E[B_s] * E[B_t - B_s] = 0 * 0 = 0.
+────────────────────────────────────────
+COVARIANCE MATRIX
+────────────────────────────────────────
 
-So E[B_s B_t] = E[B_s^2] = Var(B_s) = s.
+For a vector random variable:
 
-Conclusion (for t >= s):
-Cov(B_s, B_t) = s = min(s, t).
+X = [X₁, X₂, …, X_d]^T
 
-Because the argument is symmetric, for any s,t >= 0:
-Cov(B_s, B_t) = min(s, t).
+The covariance matrix Σ is:
 
-If the Brownian motion has variance parameter σ^2 (i.e., increments ~ Normal(0, σ^2 (t-s))), then:
-Cov(B_s, B_t) = σ^2 min(s, t).
+Σ = E[(X − μ)(X − μ)^T]
 
-5. Remarks and consequences
+Expanding produces a d×d matrix:
 
-* Variance function: Var(B_t) = C(t,t) = min(t,t) = t (for standard Brownian). So variance grows linearly with time.
-* Correlation between B_s and B_t (t >= s, standard Brownian):
-  Corr(B_s, B_t) = Cov(B_s, B_t) / sqrt(Var(B_s) Var(B_t))
-  = s / sqrt(s * t)
-  = sqrt(s / t) = sqrt(min(s,t) / max(s,t)).
-  Example numeric:
-  take s = 2, t = 5:
-  Cov(B_2, B_5) = min(2,5) = 2.
-  Var(B_2) = 2, Var(B_5) = 5.
-  Corr = 2 / sqrt(2 * 5) = 2 / sqrt(10).
-  Compute sqrt(10) step by step:
-  10 = 100/10 so sqrt(10) ≈ 3.162277660168379...
-  Thus Corr ≈ 2 / 3.162277660168379 ≈ 0.6324555320336759.
-* The covariance function min(s,t) is continuous and positive semidefinite (it is a valid kernel). It uniquely characterizes the second-order structure of Brownian motion (together with zero mean and Gaussianity it determines the finite-dimensional distributions).
-* Interpretation: B_s is perfectly correlated with B_t when s = t (corr = 1), and correlation decreases as the time gap grows; the correlation depends only on the ratio s/t when t >= s.
+Σ =
+[ Cov(X₁,X₁)  Cov(X₁,X₂)  …  Cov(X₁,X_d)
+Cov(X₂,X₁)  Cov(X₂,X₂)  …  Cov(X₂,X_d)
+⋮               ⋮           ⋱     ⋮
+Cov(X_d,X₁)  Cov(X_d,X₂)  …  Cov(X_d,X_d) ]
 
-6. Quick proof that C(s,t)=min(s,t) is positive semidefinite (sketch)
-   Let t1 < t2 < ... < tn and coefficients a1,...,an. Consider linear combination L = sum_i a_i B_{t_i}.
-   Because Brownian has independent Gaussian increments, L is Gaussian with variance
-   Var(L) = sum_{i,j} a_i a_j min(t_i, t_j).
-   Variance is always >= 0, so the kernel min(s,t) is positive semidefinite. That shows it's a valid covariance function.
+Properties:
 
-7. Summary (short)
+* Σ is symmetric → Cov(X_i, X_j) = Cov(X_j, X_i)
+* Σ is positive semidefinite
+* Diagonal entries = variances
+* Off-diagonal entries = cross-covariances
 
-* Variance measures spread: Var(X) = E[X^2] - (E[X])^2.
-* Covariance measures linear co-movement: Cov(X,Y) = E[XY] - E[X]E[Y].
-* For a stochastic process X_t the covariance function is C(s,t) = Cov(X_s, X_t).
-* For standard Brownian motion B_t (B_0=0, independent Gaussian increments, Var(B_t)=t):
-  Cov(B_s, B_t) = min(s, t).
-  For scaled Brownian with variance parameter σ^2:
-  Cov(B_s, B_t) = σ^2 min(s, t).
+────────────────────────────────────────
+INSIGHTFUL NUMERICAL EXAMPLE
+────────────────────────────────────────
 
-End.
+Suppose we measure 
+height (cm) and weight (kg) for 3 people:
+
+X = height = [170, 180, 160]
+Y = weight = [65, 80, 60]
+
+Step 1: Means
+
+x̄ = (170 + 180 + 160) / 3 = 170
+ȳ = (65 + 80 + 60) / 3 = 68.33̅
+
+Step 2: Deviations
+
+i | x_i | x_i − x̄ | y_i | y_i − ȳ | (x_i−x̄)(y_i−ȳ)
+---+-----+----------+-----+---------+----------------
+1 | 170 |    0     |  65 |  -3.33  |  0
+2 | 180 |   10     |  80 |  11.67  | 116.7
+3 | 160 |  -10     |  60 |  -8.33  | 83.3
+
+Sum of cross-products = 200
+
+Step 3: Sample covariance
+
+Cov(X, Y) = 200 / (3 − 1) = 100
+
+→ Positive covariance → 
+Taller people weigh more in this sample
+
+Step 4: 
+We also need variances for the matrix
+
+Var(X) = Σ(x_i − x̄)² / (n−1)
+= (0² + 10² + (-10)²) / 2
+= 200 / 2 = 100
+
+Var(Y) = Σ(y_i − ȳ)² / (n−1)
+= ((-3.33)² + (11.67)² + (-8.33)²) / 2
+≈ 216.67 / 2 = 108.33
+
+Step 5: Covariance matrix
+
+Σ =
+[ 100      100
+100   108.33 ]
+
+Interpretation:
+
+* Diagonal: height variance = 100,
+ weight variance = 108.33
+* Off-diagonals: covariance = 100 →
+linear positive relationship
+
+────────────────────────────────────────
+KEY INTUITIONS AT A GLANCE
+────────────────────────────────────────
+
+| Term                 | Why it exists                            |
+| -------------------- | ---------------------------------------- |
+| (x_i − x̄)(y_i − ȳ)  | Measures co-movement from average        |
+| Sum of those terms   | Aggregates relationships from each point |
+| Divide by (n − 1)    | Makes unbiased estimator                 |
+| Matrix form          | Stores all pairwise covariance relations |
+| Diagonal = variances | Each variable with itself                |
+| Symmetry of matrix   | Cov(X,Y) must equal Cov(Y,X)             |
+
+────────────────────────────────────────
+SHORT TAKEAWAY
+────────────────────────────────────────
+Covariance quantifies 
+how variables move together.
+Covariance matrices extend that idea 
+to many variables, forming the foundation of:
+
+* Principal Component Analysis (PCA)
+* Multivariate Gaussian distributions
+* Portfolio optimization
+* State estimation (Kalman Filters)
+* Machine learning representations
 
 """
 
-
 """
-Correlation shows **how strongly 
-and in what direction two variables
-move together** in a *linear* sense.
+Expansion of Σ = E[(X − μ)(X − μ)^T], an algebraic derivation
 
 
-1. **Definition**
-   Correlation between X and Y is:
-   Corr(X,Y) = Cov(X,Y) / (sqrt(Var(X)) sqrt(Var(Y))).
+1. Algebraic expansion (symbolic)
+   Let X be a d-dimensional random vector
+   X = [X1, X2, …, Xd]^T
+   and μ = E[X] = [μ1, μ2, …, μd]^T.
 
-It is always in the range:
--1 ≤ Corr(X,Y) ≤ 1.
+Form the centered vector:
+X − μ = [X1 − μ1, X2 − μ2, …, Xd − μd]^T.
 
-2. **What correlation tells you**
+The outer product (X − μ)(X − μ)^T is the d×d matrix whose (i,j) entry is
+(X − μ)_i · (X − μ)_j = (Xi − μi)(Xj − μj).
 
-A) **Direction of relationship**
-
-* Positive correlation (> 0):
-  When X increases relative to its mean,
-  Y tends to increase relative to its mean.
-* Negative correlation (< 0):
-  When X increases, Y tends to decrease.
-* Zero correlation (= 0):
-  No linear relationship — knowing X tells you
-  nothing about the linear behavior of Y.
-
-B) **Strength of relationship**
-
-* |Corr| close to 1 → strong linear relationship.
-* |Corr| close to 0 → weak linear relationship.
-* Exactly ±1 → perfect linear relationship.
-
-Note: correlation ONLY measures
-*linear* relationships —variables may be
-strongly related nonlinearly even if correlation = 0.
-
----
-3. **Examples**
-   Example 1: perfect positive correlation
-   X = [1, 2, 3]
-   Y = [2, 4, 6]
-   Here Y = 2X exactly, so Corr(X,Y) = +1.
-
-Example 2: negative correlation
-X = [1, 2, 3]
-Y = [6, 4, 2]
-Here Y decreases exactly when X increases.
-Corr(X,Y) = -1.
-
-Example 3: zero correlation but dependent
-X uniformly distributed on [-1,1].
-Y = X^2.
-Y clearly depends on X, but the relationship 
-is nonlinear and symmetric.
-Corr(X,Y) = 0.
-
----
-4. **Intuition**
-   Correlation answers:
-   “If X is above its average, 
-   is Y likely to be above its average too?”
-
-* If yes → positive correlation.
-* If no → negative correlation.
-* If there is no consistent pattern
- → correlation near zero.
-
----
-5. **Important facts**
-
-* Correlation does *not* imply causation.
-* Correlation is unaffected by scale:
-  Corr(X, aY + b) = Corr(X,Y) if a > 0.
-* Correlation only depends on covariance shape,
- not magnitude.
- 
----
-
-When the relationship between variables is **nonlinear**,
-the standard Pearson correlation (Corr(X,Y) = Cov(X,Y)/sqrt(Var(X)Var(Y)))
-may **fail to detect dependence**. For example, with Y = X² 
-and X symmetric around 0, Pearson correlation is zero even though
-Y clearly depends on X.
-
-Here’s a step-by-step guide for measuring correlation in nonlinear cases:
-
----
-
-### 1) **Spearman rank correlation**
-
-* Idea: instead of raw values, use **ranks** of the data.
-* Definition:
-
-  1. Replace each X_i and Y_i by their ranks R(X_i) and R(Y_i) 
-  (smallest value → rank 1, etc.)
-  2. Compute Pearson correlation of the ranks:
-     ρ_s = Corr(R(X), R(Y))
-* Properties:
-
-  * Detects **monotonic relationships** (increasing or decreasing)
-  even if nonlinear.
-  * Value between -1 and 1, like Pearson correlation.
-
-**Example**:
-X =      [-2, -1, 0, 1, 2]
-Y = X² = [4, 1, 0, 1, 4]
-
-* Pearson correlation: Corr(X,Y) = 0
-* Spearman rank correlation: non-zero 
-(≈0.9 negative monotonicity if you consider
-the decreasing part).
-
----
-
-### 2) **Kendall tau correlation**
-
-* Another **rank-based measure**:
-
-  * Measures the number of concordant and discordant pairs.
-  * Useful for monotonic relationships.
-* Like Spearman, it detects monotonicity but is sometimes 
-more robust with small samples or ties.
-
----
-
-### 3) **Mutual Information**
-
-* Captures **any dependency**, linear or nonlinear.
-* Definition:
-  MI(X,Y) = ∑_x ∑_y p(x,y) log(p(x,y) / (p(x)p(y)))
-* Properties:
-
-  * MI = 0 ⇔ X and Y are independent.
-  * MI > 0 detects **any type of dependence**, not just linear.
-  * Non-negative, but not bounded like correlation. 
-  Often normalized to [0,1] for interpretability.
-
----
-
-### 4) **Distance correlation**
-
-* A newer method:
-
-  * Measures dependence based on distances between points.
-  * Zero **iff X and Y are independent**, unlike Pearson.
-  * Works for multidimensional data too.
-
----
-
-### 5) **Summary table**
-
-| Method                    | Detects  | Range  | Notes                                 |
-| ------------------------- | -------- | ------ | ------------------------------------- |
-| Pearson correlation       | Linear   | [-1,1] | Only linear relationships             |
-| Spearman rank correlation | Monotone | [-1,1] | Ranks → good for nonlinear monotone   |
-| Kendall tau               | Monotone | [-1,1] | Robust for ties and small samples     |
-| Mutual Information        | Any      | [0,∞]  | Needs density estimation; not bounded |
-| Distance correlation      | Any      | [0,1]  | Zero only if independent              |
-
----
-Correlation in Brownian motion
+(Outer product:
+The outer product of two vectors is 
+a matrix formed by multiplying each element
+of one vector by each element of the other vector.
+More formally:
+If a is an m×1 column vector and
+b is an n×1 column vector, 
+then their outer product is:
+a bᵀ = an m×n matrix where the (i,j) entry is:
+(a bᵀ)_{ij} = a_i · b_j)
+Intuition:
+It captures pairwise relationships between 
+components of two vectors — which is why 
+covariance matrices are built 
+from outer products of centered data vectors.)
 
 
-1. **Brownian motion properties**
-   Let B_t be standard Brownian motion:
 
-* B_0 = 0
-* Independent increments: B_t - B_s ~ Normal(0, t-s) for t > s
-* E[B_t] = 0, Var(B_t) = t
-* Covariance function: Cov(B_s, B_t) = min(s, t)
+Taking expectation elementwise:
+Σ = E[(X − μ)(X − μ)^T]
+means the (i,j) entry of Σ is
+Σ_{ij} = E[(Xi − μi)(Xj − μj)].
 
----
-2. **Correlation formula**
-   Corr(B_s, B_t) = Cov(B_s, B_t) / sqrt(Var(B_s) * Var(B_t))
+But by definition that scalar is
+exactly Cov(Xi, Xj). Therefore
+Σ_{ij} = Cov(Xi, Xj).
 
-Step by step:
+So Σ = [ Cov(Xi, Xj) ]_{i=1..d, j=1..d}.
 
-* Assume t >= s
-* Cov(B_s, B_t) = min(s, t) = s
-* Var(B_s) = s, Var(B_t) = t
+Properties visible from this expansion:
 
-Corr(B_s, B_t) = s / sqrt(s * t) = sqrt(s / t)
+* Symmetry: 
+Σ_{ij} = E[(Xi−μi)(Xj−μj)] = 
+         E[(Xj−μj)(Xi−μi)] = Σ_{ji}.
+* Diagonal entries: 
+Σ_{ii} = E[(Xi−μi)^2] = Var(Xi).
+* Positive semidefinite: for any vector a,
+ a^T Σ a = E[(a^T (X−μ))^2] ≥ 0.
 
----
-3. **Interpretation**
+2. Concrete numeric example (full arithmetic)
+Two-dimensional example (d = 2).
+ Three samples (n = 3).
 
-* Correlation depends on ratio s/t
-* Perfect correlation at same time: s = t → Corr = 1
-* Correlation decreases as t increases relative to s
+Samples (each x_k is a column vector):
+x1 = [170, 65]^T
+x2 = [180, 80]^T
+x3 = [160, 60]^T
 
-Example:
+Compute the sample mean μ (componentwise):
+μ1 = mean of first components (heights) =
+ (170 + 180 + 160) / 3 = 510 / 3 = 170.
+μ2 = mean of second components (weights) = 
+(65 + 80 + 60) / 3 = 205 / 3. 
+(Keep exact fraction: 205/3.)
 
-* s = 2, t = 5
-* Corr(B_2, B_5) = sqrt(2/5) ≈ 0.632
+So
+μ = [170, 205/3]^T.
 
-Intuition: earlier value B_s partially explains later
-value B_t, but independent increments reduce correlation.
+Compute centered vectors s_k = x_k − μ:
 
----
-4. **Why correlation is linear in BM**
+s1 = x1 − μ = [170 − 170, 65 − 205/3]^T
+= [0,  (195/3 − 205/3)]^T
+= [0, −10/3]^T.
 
-* BM has Gaussian increments, and covariance fully determines dependence
-* Correlation is determined by covariance: linear scaling with min(s,t)
-* Nonlinear measures (Spearman, mutual information) give similar 
-qualitative dependence here because bivariate Gaussian joint distribution
+s2 = x2 − μ = [180 − 170, 80 − 205/3]^T
+= [10, (240/3 − 205/3)]^T
+= [10, 35/3]^T.
 
----
-5. **Summary**
+s3 = x3 − μ = [160 − 170, 60 − 205/3]^T
+= [−10, (180/3 − 205/3)]^T
+= [−10, −25/3]^T.
 
-* Cov(B_s, B_t) = min(s, t)
-* Corr(B_s, B_t) = sqrt(min(s,t)/max(s,t))
-* Perfect correlation at same time, decreasing as gap increases
-* Linear correlation arises naturally from Gaussian property of Brownian motion
+Form the outer products 
+s_k s_k^T for each sample (2×2 matrices).
+Compute exactly:
 
+s1 s1^T =
+[ 0 * 0,     0 * (−10/3)
+(−10/3)*0, (−10/3)*(−10/3) ]
+
+= [ 0,        0
+0,      100/9 ].
+(Explanation: (−10/3)^2 = 100/9.)
+
+s2 s2^T =
+[ 10 * 10,      10 * (35/3)
+(35/3) * 10,  (35/3)*(35/3) ]
+
+= [ 100,       350/3
+350/3,    1225/9 ].
+(Explanation: 35^2 = 1225, so (35/3)^2 = 1225/9.)
+
+s3 s3^T =
+[ (−10)*(−10),  (−10)*(−25/3)
+(−25/3)*(−10), (−25/3)*(−25/3) ]
+
+= [ 100,        250/3
+250/3,     625/9 ].
+(Explanation: (−25)^2 = 625, 
+so (−25/3)^2 = 625/9. 
+Note signs: products are positive here.)
+
+Sum these outer-product matrices elementwise:
+
+Sum_{k=1..3} s_k s_k^T =
+[ 0 + 100 + 100,          0 + 350/3 + 250/3
+0 + 350/3 + 250/3,     100/9 + 1225/9 + 625/9 ].
+
+Compute each entry:
+
+(1,1): 0 + 100 + 100 = 200.
+(1,2) and (2,1): 0 + 350/3 + 250/3 =
+ (350 + 250) / 3 = 600 / 3 = 200.
+
+(2,2): (100 + 1225 + 625) / 9 =
+ 1950 / 9 = 650 / 3.  
+ (Because 1950/9 simplifies dividing 
+ numerator and denominator by 3 → 650/3.)
+
+So the sum matrix is:
+[ 200,   200
+200, 1950/9 ].
+(And 1950/9 = 650/3 ≈ 216.6666667.)
+
+Now apply expectation / averaging.
+Two common conventions:
+
+A) Population covariance formula (using 1/n):
+Σ_population_estimate = 
+(1/n) * Σ_{k=1..n} s_k s_k^T = (1/3) * (sum matrix).
+
+Divide each entry by 3:
+
+Σ_population_estimate =
+[ 200/3,   200/3
+200/3,  (1950/9) / 3 ].
+
+Simplify (1950/9)/3 = 1950/27 = 650/9.
+
+So
+Σ_population_estimate =
+[ 200/3,   200/3
+200/3,   650/9 ].
+
+Numerical approximations:
+200/3 ≈ 66.6666667
+650/9 ≈ 72.2222222
+
+B) Sample (unbiased) 
+covariance formula (using 1/(n−1)):
+Σ_sample_unbiased = 
+(1/(n − 1)) * Σ_{k=1..n} s_k s_k^T =
+(1/2) * (sum matrix).
+
+Divide each entry by 2:
+
+Σ_sample_unbiased =
+[ 200/2,  200/2
+200/2, (1950/9) / 2 ].
+
+Simplify:
+200/2 = 100.
+(1950/9)/2 = 1950/18 =
+ 325/3 ≈ 108.3333333.
+
+So
+Σ_sample_unbiased =
+[ 100,    100
+100,   325/3 ].
+
+Numerical approximations:
+100.0
+325/3 ≈ 108.3333333
+
+Verification with scalar formula:
+
+* Cov(sample X, sample Y) (unbiased) =
+sum_i (x_i − x̄)(y_i − ȳ) / (n − 1) =
+200 / 2 = 100. (Matches off-diagonal.)
+* Var(X) = 
+200 / 2 = 100.
+ (Matches Σ_{11}.)
+* Var(Y) = 
+(1950/9) / 2 = 325/3 ≈ 108.3333.
+ (Matches Σ_{22}.)
+
+3. Summary of connection to the symbolic expansion
+* The outer product (X − μ)(X − μ)^T has
+ (i,j) entry (Xi − μi)(Xj − μj).
+* Taking expectation E[·] converts 
+each entry to E[(Xi − μi)(Xj − μj)], 
+which is exactly Cov(Xi, Xj).
+* With finite samples, replacing expectation 
+by an empirical average over samples gives 
+either the population empirical covariance (1/n)
+or the unbiased sample covariance (1/(n−1))
+depending on convention. The numeric example
+above demonstrates both.
 
 """
