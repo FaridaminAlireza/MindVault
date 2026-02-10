@@ -1,4 +1,4 @@
-- Some favourite books that I read
+Some favourite books that I read:
 
 - Mathametics
   - Modern Engineering Mathematics, Glyn James
