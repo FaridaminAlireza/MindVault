@@ -1,12 +1,12 @@
 - Some favourite books that I read
 
-  - Mathametics
-    - Modern Engineering Mathematics, Glyn James
-    - A Modern Introduction to Probability and Statistics, FM Dekking
-    - Chapters from Linear Algebra with Applications, Custom Binding UOttawa
-    - Calculus: A Complete Introduction: Teach Yourself, Hugh Neill
-    - Trigonometry: A Complete Introduction, Hugh Neill
-    - Logic: A Complete Introduction, Siu Fan Lee 
+- Mathametics
+  - Modern Engineering Mathematics, Glyn James
+  - A Modern Introduction to Probability and Statistics, FM Dekking
+  - Chapters from Linear Algebra with Applications, Custom Binding UOttawa
+  - Calculus: A Complete Introduction: Teach Yourself, Hugh Neill
+  - Trigonometry: A Complete Introduction, Hugh Neill
+  - Logic: A Complete Introduction, Siu Fan Lee 
 
 - Software
   - Clean Architecture, Robert C. Martin
