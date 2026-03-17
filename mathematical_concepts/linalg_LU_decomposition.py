@@ -1,7 +1,7 @@
 """LU Decomposition 
 
-
-We want to decompose a given square matrix A into two matrices L and U, such that:
+We want to decompose a given square matrix A into
+two matrices L and U, such that:
     A = L * U
 where
 - L = lower-triangular (1’s on diagonal,
@@ -143,7 +143,8 @@ print("Check PA=LU:", np.allclose(P @ A, L @ U))
 ----
 Intuitive Analogy
 
-Think of LU decomposition like recording your Gaussian elimination process:
+Think of LU decomposition like
+recording your Gaussian elimination process:
 - Each time you eliminate a number → you store 
 how much of one row was subtracted from another in L.
 - The matrix you get at the end of elimination is U.

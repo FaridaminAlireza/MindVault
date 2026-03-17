@@ -1,7 +1,5 @@
 """
-===========================
-MULTINOMIAL AND BINOMIAL THEOREM NOTES
-===========================
+MULTINOMIAL AND BINOMIAL THEOREM
 
 1. BINOMIAL THEOREM
 
@@ -40,7 +38,6 @@ Intuition for coefficient 4 of x^3y:
 (x,x,x,y), (x,x,y,x), (x,y,x,x), (y,x,x,x)
 
 ---
-
 2. MULTINOMIAL THEOREM
 
 Statement:
@@ -99,7 +96,6 @@ Example: (x + y + z + w)^4, term x^2 y z
 - There are 12 sequences (x,x,y,z), (x,x,z,y), ..., (z,y,x,x)  
 
 ---
-
 4. COUNTING NUMBER OF REPETITIONS
 
 - Coefficient counts **how many times a term appears** in the expansion  
@@ -119,7 +115,6 @@ multiply the number of ways for each choice
     - Total = 6 * 2 * 1 = 12
 
 ---
-
 5. SYSTEMATIC GENERATION OF TERMS
 
 To generate all exponent tuples (k1,...,km) with sum n:
@@ -148,7 +143,6 @@ Example: (x + y + z)^3, n=3, m=3
 - Each tuple → term with coefficient n! / (k1! k2! k3!)  
 
 ---
-
 6. KEY INSIGHTS
 
 - Multinomial coefficient = number of sequences producing a term  
@@ -159,9 +153,7 @@ Example: (x + y + z)^3, n=3, m=3
 - Visualizing “slots” for each variable helps understand 
 coefficients and terms  
 
-"""
-
-"""
+---
 MULTINOMIAL THEOREM (more details)
 
 The multinomial theorem generalizes the binomial theorem 

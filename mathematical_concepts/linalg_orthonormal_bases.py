@@ -16,9 +16,9 @@ v = (2, 1, 1)
 
 Goal: find coordinates of v in an orthonormal basis for span{u₁, u₂}.
 
--------------------------------------------------------------------------------------
+----
 2) Orthonormalize the basis (Gram–Schmidt)
--------------------------------------------------------------------------------------
+----
 Step 2.1 — first orthonormal vector e₁:
 ‖u₁‖ = √2
 e₁ = (1/√2, 1/√2, 0)
@@ -33,9 +33,9 @@ e₂ = (1/√6, -1/√6, 2/√6)
 
 Now {e₁, e₂} is an orthonormal basis.
 
--------------------------------------------------------------------------------------
+----
 3) Compute coordinates of v in the orthonormal basis
--------------------------------------------------------------------------------------
+----
 c₁ = v·e₁ = 3/√2
 c₂ = v·e₂ = 3/√6
 
@@ -44,9 +44,9 @@ Coordinates of v relative to {e₁, e₂}:
 
 Reconstruction check: (3/√2)e₁ + (3/√6)e₂ = (2, 1, 1) = v
 
--------------------------------------------------------------------------------------
+----
 4) Matrix viewpoint
--------------------------------------------------------------------------------------
+----
 Matrix Q = [e₁ e₂]
 
 Then:
@@ -55,9 +55,9 @@ Projection onto the span: proj(v) = Q Qᵀ v (reconsturction of V)
 
 If Q is square and orthonormal, Q⁻¹ = Qᵀ.
 
--------------------------------------------------------------------------------------
+----
 5) Orthogonal projection explained
--------------------------------------------------------------------------------------
+----
 Projection means finding the point v_S inside the subspace S = span{e₁, e₂, …}
 that is closest to v, such that v - v_S ⟂ S.
 
@@ -71,9 +71,9 @@ proj_S(v) = c₁ e₁ + c₂ e₂ = (2,1,1)
 
 Since v already lies in the span, projection equals v.
 
--------------------------------------------------------------------------------------
+----
 6) Matrix computation example for QQᵀv
--------------------------------------------------------------------------------------
+----
 Q =
 [ 0.7071   0.4082 ]
 [ 0.7071  -0.4082 ]
@@ -91,10 +91,11 @@ Step 2: Q(Qᵀv) =
 
 v lies entirely in the plane spanned by e₁ and e₂.
 
--------------------------------------------------------------------------------------
+----
 7) Interpretation of coordinates c₁, c₂ and relation to eigenvalues
--------------------------------------------------------------------------------------
-- cᵢ = v·eᵢ are the coordinate scalars — they tell how much v points along each orthonormal direction.
+----
+- cᵢ = v·eᵢ are the coordinate scalars — 
+they tell how much v points along each orthonormal direction.
 - They are **not eigenvalues** by themselves.
 
 Eigenvalues appear only when there is a linear operator A such that
@@ -119,7 +120,8 @@ General proof: Why A v = Σ_i c_i λ_i e_i holds
 Assume:
 - A is a diagonalizable (or symmetric) linear operator on ℝ^n.
 - { e₁, e₂, …, eₙ } are orthonormal eigenvectors of A.
-- The corresponding eigenvalues are { λ₁, λ₂, …, λₙ }, meaning A eᵢ = λᵢ eᵢ for all i.
+- The corresponding eigenvalues are { λ₁, λ₂, …, λₙ },
+ meaning A eᵢ = λᵢ eᵢ for all i.
 
 Let any vector v ∈ ℝⁿ be expressed as a linear combination of these eigenvectors:
   v = Σ_i cᵢ eᵢ
@@ -181,7 +183,8 @@ rotate to eigenbasis (Q^T), scale each coordinate by Λ, rotate back (Q).
 --
 Coordinates in eigenbasis, and effect of A:
 
-- Coordinates of a vector v in the eigenbasis are given by c = Q^T v. So v = Q c and c_i = v · e_i.
+- Coordinates of a vector v in the eigenbasis are given by
+ c = Q^T v. So v = Q c and c_i = v · e_i.
 - Apply A:
     A v = (Q Λ Q^T) v = Q Λ (Q^T v) = Q Λ c.
 - Λ c = (λ_1 c_1, λ_2 c_2, ..., λ_n c_n)^T.
@@ -197,9 +200,9 @@ Geometric intuition
 - So A acts by "rotate → scale → rotate back".
 
 
--------------------------------------------------------------------------------------
+----
 8) Summary formulas
--------------------------------------------------------------------------------------
+----
 Coordinates:   c = Qᵀv
 Projection:    v_proj = Q Qᵀ v
 Residual:      r = v - v_proj  (orthogonal to subspace)

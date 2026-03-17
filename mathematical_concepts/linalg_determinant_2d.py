@@ -16,7 +16,8 @@ The area of a parallelogram is:
 Area = base × height
 
 - Choose u as the base vector.
-- Height = perpendicular distance from the tip of v to the line along u.
+- Height = perpendicular distance from
+ the tip of v to the line along u.
 
 Let θ = angle between u and v. Then:
 
@@ -34,7 +35,8 @@ The magnitude of v: |v| = sqrt(v_x^2 + v_y^2)
 
 From the dot product formula:
 
-u · v = |u||v| cos(θ) → cos(θ) = (u_x v_x + u_y v_y) / (|u||v|)
+u · v = |u||v| cos(θ) → cos(θ) =
+ (u_x v_x + u_y v_y) / (|u||v|)
 
 Then sin^2(θ) = 1 − cos^2(θ):
 
@@ -58,7 +60,8 @@ Compute:
 |u|^2 |v|^2 = (u_x^2 + u_y^2)(v_x^2 + v_y^2)  
             = u_x^2 v_x^2 + u_x^2 v_y^2 + u_y^2 v_x^2 + u_y^2 v_y^2
 
-(u · v)^2 = (u_x v_x + u_y v_y)^2 = u_x^2 v_x^2 + 2 u_x u_y v_x v_y + u_y^2 v_y^2
+(u · v)^2 = 
+(u_x v_x + u_y v_y)^2 = u_x^2 v_x^2 + 2 u_x u_y v_x v_y + u_y^2 v_y^2
 
 Subtract:
 

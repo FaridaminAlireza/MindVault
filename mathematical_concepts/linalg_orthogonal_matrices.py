@@ -9,7 +9,8 @@ In mathematical terms, for vectors u and v,
 u · v = 0 ⟺ u and v are orthogonal.
 
 Orthonormal vectors:
-Two vectors are orthonormal if they are both orthogonal and each has a magnitude (length) of 1.
+Two vectors are orthonormal 
+if they are both orthogonal and each has a magnitude (length) of 1.
 That is, for vectors u and v,
 u · v = 0 and ||u|| = ||v|| = 1 ⟺ u and v are orthonormal.
 
@@ -18,7 +19,8 @@ A square matrix Q in R^{n x n} is orthogonal if:
 Equivalently, Q^{-1} = Q^T.
 
 2. Geometric meaning
-Orthogonal matrices preserve the Euclidean inner product, lengths, and angles.
+Orthogonal matrices preserve the Euclidean inner product,
+lengths, and angles.
 For any x, y in R^n:
     (Qx) · (Qy) = x · y
 Hence norms are preserved: ||Qx|| = ||x||.
@@ -41,7 +43,8 @@ For Q^T Q = I we require:
 So columns are an orthonormal set.
 
 5. Row-orthonormality
-Because QQ^T = I also holds for orthogonal Q, the rows of Q are orthonormal as well.
+Because QQ^T = I also holds for orthogonal Q,
+the rows of Q are orthonormal as well.
 
 6. Example — 2×2 rotation
 Let
@@ -60,7 +63,8 @@ For any x, y:
 8. Properties
 - Inverse: Q^{-1} = Q^T.
 - Determinant: det(Q) = ±1. 
-  Matrices with det = +1 form the special orthogonal group SO(n) (rotations).
+  Matrices with det = +1 form the special orthogonal group SO(n)
+  (rotations).
 - Eigenvalues: all eigenvalues λ satisfy |λ| = 1 
   (for real orthogonal matrices, eigenvalues are ±1 
   or complex conjugate pairs on the unit circle).

@@ -71,19 +71,23 @@ Sample covariance/variance commonly divide by N-1;
 adjust if you want sample estimates.)
 
 3. Covariance function for a stochastic process
-   Let (X_t)_{t in T} be a stochastic process (index set T could be time R+ or integers).
+   Let (X_t)_{t in T} be a stochastic process
+   (index set T could be time R+ or integers).
    Define the covariance function C(s,t) as:
-   C(s, t) = Cov(X_s, X_t) = E[(X_s - E[X_s])(X_t - E[X_t])] = E[X_s X_t] - E[X_s] E[X_t].
+   C(s, t) = Cov(X_s, X_t) = 
+   E[(X_s - E[X_s])(X_t - E[X_t])] = E[X_s X_t] - E[X_s] E[X_t].
 
 Important properties of a covariance function C(s,t):
 
 * Symmetry: C(s,t) = C(t,s).
-* Positive semidefinite: for any finite set of times t1,...,tn and any real numbers a1,...,an,
+* Positive semidefinite: for any finite set of 
+times t1,...,tn and any real numbers a1,...,an,
   sum_{i,j} a_i a_j C(t_i, t_j) >= 0.
 * Variance at time t is the diagonal: Var(X_t) = C(t,t).
 * If the process has zero mean (E[X_t]=0 for all t), then C(s,t) = E[X_s X_t].
 
-A common special case: stationary process (strict or weak). For weak stationarity:
+A common special case: stationary process (strict or weak).
+For weak stationarity:
 mean is constant and covariance depends only on lag h = t - s:
 C(s,t) = γ(h) where γ(h) = Cov(X_t, X_{t+h}).
 
@@ -92,8 +96,10 @@ C(s,t) = γ(h) where γ(h) = Cov(X_t, X_{t+h}).
 
 * B_0 = 0 (almost surely).
 * Continuous paths.
-* Independent increments: for 0 <= s < t, increment B_t - B_s is independent of the past up to time s.
-* Gaussian increments with mean 0 and variance equal to the increment length:
+* Independent increments: for 0 <= s < t, increment B_t - B_s is
+independent of the past up to time s.
+* Gaussian increments with mean 0 and variance equal to
+the increment length:
   B_t - B_s ~ Normal(0, t - s).
 * In particular Var(B_t) = t and E[B_t] = 0.
 
@@ -110,7 +116,8 @@ Then
 E[B_s B_t] = E[B_s (B_s + (B_t - B_s))]
 = E[B_s^2] + E[B_s (B_t - B_s)].
 
-By independent increments, B_s is independent of (B_t - B_s). Also E[B_t - B_s] = 0.
+By independent increments, B_s is independent 
+of (B_t - B_s). Also E[B_t - B_s] = 0.
 Therefore E[B_s (B_t - B_s)] = E[B_s] * E[B_t - B_s] = 0 * 0 = 0.
 
 So E[B_s B_t] = E[B_s^2] = Var(B_s) = s.
@@ -121,12 +128,14 @@ Cov(B_s, B_t) = s = min(s, t).
 Because the argument is symmetric, for any s,t >= 0:
 Cov(B_s, B_t) = min(s, t).
 
-If the Brownian motion has variance parameter σ^2 (i.e., increments ~ Normal(0, σ^2 (t-s))), then:
+If the Brownian motion has variance parameter σ^2
+(i.e., increments ~ Normal(0, σ^2 (t-s))), then:
 Cov(B_s, B_t) = σ^2 min(s, t).
 
 5. Remarks and consequences
 
-* Variance function: Var(B_t) = C(t,t) = min(t,t) = t (for standard Brownian). So variance grows linearly with time.
+* Variance function: Var(B_t) = C(t,t) = min(t,t) = t
+(for standard Brownian). So variance grows linearly with time.
 * Correlation between B_s and B_t (t >= s, standard Brownian):
   Corr(B_s, B_t) = Cov(B_s, B_t) / sqrt(Var(B_s) Var(B_t))
   = s / sqrt(s * t)
@@ -139,26 +148,37 @@ Cov(B_s, B_t) = σ^2 min(s, t).
   Compute sqrt(10) step by step:
   10 = 100/10 so sqrt(10) ≈ 3.162277660168379...
   Thus Corr ≈ 2 / 3.162277660168379 ≈ 0.6324555320336759.
-* The covariance function min(s,t) is continuous and positive semidefinite (it is a valid kernel). It uniquely characterizes the second-order structure of Brownian motion (together with zero mean and Gaussianity it determines the finite-dimensional distributions).
-* Interpretation: B_s is perfectly correlated with B_t when s = t (corr = 1), and correlation decreases as the time gap grows; the correlation depends only on the ratio s/t when t >= s.
+* The covariance function min(s,t) is continuous and positive
+ semidefinite (it is a valid kernel). It uniquely characterizes
+  the second-order structure of Brownian motion (together with
+  zero mean and Gaussianity it determines the 
+  finite-dimensional distributions).
+* Interpretation: B_s is perfectly correlated with B_t when s = t 
+(corr = 1), and correlation decreases as the time gap grows;
+ the correlation depends only on the ratio s/t when t >= s.
 
 6. Quick proof that C(s,t)=min(s,t) is positive semidefinite (sketch)
-   Let t1 < t2 < ... < tn and coefficients a1,...,an. Consider linear combination L = sum_i a_i B_{t_i}.
-   Because Brownian has independent Gaussian increments, L is Gaussian with variance
+   Let t1 < t2 < ... < tn and coefficients a1,...,an. Consider
+   linear combination L = sum_i a_i B_{t_i}.
+   Because Brownian has independent Gaussian increments,
+   L is Gaussian with variance
    Var(L) = sum_{i,j} a_i a_j min(t_i, t_j).
-   Variance is always >= 0, so the kernel min(s,t) is positive semidefinite. That shows it's a valid covariance function.
+   Variance is always >= 0, so the kernel min(s,t) is positive semidefinite.
+   That shows it's a valid covariance function.
 
 7. Summary (short)
 
-* Variance measures spread: Var(X) = E[X^2] - (E[X])^2.
-* Covariance measures linear co-movement: Cov(X,Y) = E[XY] - E[X]E[Y].
-* For a stochastic process X_t the covariance function is C(s,t) = Cov(X_s, X_t).
-* For standard Brownian motion B_t (B_0=0, independent Gaussian increments, Var(B_t)=t):
+* Variance measures spread: 
+Var(X) = E[X^2] - (E[X])^2.
+* Covariance measures linear co-movement: 
+Cov(X,Y) = E[XY] - E[X]E[Y].
+* For a stochastic process X_t the covariance function
+ is C(s,t) = Cov(X_s, X_t).
+* For standard Brownian motion B_t 
+(B_0=0, independent Gaussian increments, Var(B_t)=t):
   Cov(B_s, B_t) = min(s, t).
   For scaled Brownian with variance parameter σ^2:
   Cov(B_s, B_t) = σ^2 min(s, t).
-
-End.
 
 """
 
@@ -376,7 +396,6 @@ qualitative dependence here because bivariate Gaussian joint distribution
 * Corr(B_s, B_t) = sqrt(min(s,t)/max(s,t))
 * Perfect correlation at same time, decreasing as gap increases
 * Linear correlation arises naturally from Gaussian property of Brownian motion
-
 
 """
 

@@ -221,7 +221,9 @@ This is a convex QP in α. The kernelized version will replace x_i·x_j by K(x_i
    y_i (w·x_i + b) − 1 ≥ 0
    α_i [ y_i (w·x_i + b) − 1 ] = 0  (complementary slackness)
 
-Thus either α_i = 0 (point is not a support vector) or y_i (w·x_i + b) = 1 (point lies exactly on the margin). The points with α_i > 0 are support vectors; they determine w and b.
+Thus either α_i = 0 (point is not a support vector) or y_i (w·x_i + b) = 1 
+(point lies exactly on the margin). The points with α_i > 0 are
+support vectors; they determine w and b.
 
 6. Recover w and b
    Once α* solved:

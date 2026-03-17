@@ -84,7 +84,8 @@ A = [[1, 2, 3], [2, 4, 6], [0, 1, 1]]
   Volume_new = |det(A)| * Volume_original
 * If det(A) = 0 → Volume_new = 0 → space collapses → no inverse
 
-Example: same matrix A as above, original parallelepiped edges = [1,0,0], [0,2,0], [0,0,3] → transformed volume = 0 → no inverse
+Example: same matrix A as above, original parallelepiped edges
+ = [1,0,0], [0,2,0], [0,0,3] → transformed volume = 0 → no inverse
 
 ---
 

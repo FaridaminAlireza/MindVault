@@ -11,13 +11,15 @@ Example: (a + b) + c = a + (b + c)
 3. Distributive – One operation distributes over another.
 Example: a × (b + c) = a×b + a×c
 
-4. Identity – There exists an element that leaves others unchanged under an operation.
+4. Identity – There exists an element that
+leaves others unchanged under an operation.
 Example: a + 0 = a
 
 5. Inverse – For every element, there’s another that “undoes” it.
 Example: a + (−a) = 0
 
-6. Idempotent – Applying the operation multiple times has the same effect as once.
+6. Idempotent – Applying the operation
+multiple times has the same effect as once.
 Example: a ∪ a = a (in set theory)
 
 7. Absorptive (or Absorption law) – One operation absorbs another.

@@ -32,8 +32,13 @@ This formula only works if θ is in radians.
 If θ is in degrees, convert to radians:
 θ(rad) = θ(deg) * π/180
 
-2. EXAMPLES IN BASIC TRIGONOMETRY
+Accordingly, the area of the the sector
+is derived by the proportion argument:
 
+x / (π r^2) =  θ / (2π)
+x = 1/2 θ r^2
+
+2. EXAMPLES IN BASIC TRIGONOMETRY
 ---
 
 Example 1:

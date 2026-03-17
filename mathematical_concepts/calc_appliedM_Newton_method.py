@@ -7,14 +7,16 @@
 # or impossible to obtain.
 
 # Approach
-# Given a function f(x) and its derivative f'(x), the Newton-Raphson iteration formula is:
+# Given a function f(x) and its derivative f'(x),
+#  the Newton-Raphson iteration formula is:
 
 #  x_{n+1} = x_n - f(x_n)/f'(x_n)
 
 # Here:
 # - x_n is the current approximation.
 # - x_{n+1} is the next, hopefully more accurate, approximation.
-# - The process is repeated until |x_{n+1} - x_n| is smaller than a specified tolerance.
+# - The process is repeated until |x_{n+1} - x_n| 
+# is smaller than a specified tolerance.
 # The convergance is proved through Taylor series expansion.
 
 
@@ -127,12 +129,14 @@ def newton_method(f, f_prime, x0, tol=1e-7, max_iter=100):
         fx = f(x)
         fpx = f_prime(x)
         if fpx == 0:
-            raise ValueError("Derivative is zero. No solution found.")
+            raise ValueError(
+                "Derivative is zero. No solution found.")
         x_next = x - fx / fpx
         if abs(x_next - x) < tol:
             return x_next
         x = x_next
-    raise ValueError("Did not converge within max_iter iterations")
+    raise ValueError(
+        "Did not converge within max_iter iterations")
 
 # Ex f(x)=x2−2=0
 f = lambda x: x**2 - 2

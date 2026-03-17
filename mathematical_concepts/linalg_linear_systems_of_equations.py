@@ -165,7 +165,6 @@ Check: A @ x = b ? ->
 Conclusion: The solved coefficients are a=1, b=2, c=3, d=4 as expected.
 
 
-
 ----
 5. Extra information on LU Decomposition and Role of y, L, U, and b
 

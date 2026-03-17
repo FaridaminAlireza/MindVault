@@ -1,6 +1,7 @@
 """
 LU Decomposition — Intuition and Reasoning
-Goal: Understand L * U = A and why the multipliers in Gaussian elimination go into L
+Goal: Understand L * U = A and why the multipliers in
+ Gaussian elimination go into L
 
 
 1. Gaussian elimination = a sequence of linear transformations
@@ -98,7 +99,8 @@ Therefore, L * U reconstructs A exactly.
 
 ----------
 6. Intuitive Summary
-Gaussian elimination: Turns A into upper-triangular U by subtracting multiples of rows
+Gaussian elimination: Turns A into upper-triangular U 
+by subtracting multiples of rows
 Multipliers: How much of a row was subtracted — stored in L
 L is Product of inverse elimination matrices (records elimination history)
 U is the result after elimination

@@ -246,8 +246,6 @@ Householder: reflect the space to eliminate unwanted components in one shot.
 
 QR is fundamental in numerical linear algebra because orthogonal transformations
 preserve length and are numerically stable.
-
-
 """
 
 
@@ -257,21 +255,25 @@ The Gram–Schmidt process is fundamentally a method to produce
 an orthonormal basis of the column space of a matrix. 
 
 1. Orthonormal basis → Q
-  Each column of (Q) is a unit vector (q_j) that is orthogonal to all the previous (q_i) ((i<j)).
+  Each column of (Q) is a unit vector (q_j) that is orthogonal to
+  all the previous (q_i) ((i<j)).
   So (Q) stores the orthonormal basis of the column space of (A).
 
 2. Projections → R
   Each entry (r_{ij} = q_i^T a_j) is essentially the projection of (a_j) onto 
   the already computed orthonormal vectors.
-  So (R) stores the “recipe” for reconstructing the original columns from the orthonormal basis.
-  It is upper-triangular because when computing (q_j), we only need projections onto (q_1 . q_j).
+  So (R) stores the “recipe” for reconstructing the original columns
+  from the orthonormal basis.
+  It is upper-triangular because when computing (q_j),
+  we only need projections onto (q_1 . q_j).
 
 3. Geometric intuition
    * Step by step, you take a vector (a_j),
     remove all components along the previously built orthonormal vectors 
     (those subtractions are encoded in (R)), 
     and normalize the residual to get the new orthonormal vector (q_j).
-   * Hence, Q contains the basis, R contains the coordinates of the original vectors in that basis.
+   * Hence, Q contains the basis, R contains the coordinates of
+   the original vectors in that basis.
 
 So in short:
 * Q = orthonormal basis

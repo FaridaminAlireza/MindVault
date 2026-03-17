@@ -301,9 +301,6 @@ a linear approximation whose error is o(||h||).
 """
 
 """
-Here is the **full explanation in clean raw text format** — with no LaTeX, no symbols, no formatting other than plain text.
-
----
 Jacobian Matrix
 
 1. What a Jacobian is
@@ -320,7 +317,8 @@ Jacobian Matrix
    a small input change h.
 
 2. 1D case
-   When a function goes from R^1 to R^1, there is only one input and one output.
+   When a function goes from R^1 to R^1, 
+   there is only one input and one output.
    The derivative f'(a) is a single number.
    The linear approximation is:
    f(a + h) ≈ f(a) + f'(a) * h
