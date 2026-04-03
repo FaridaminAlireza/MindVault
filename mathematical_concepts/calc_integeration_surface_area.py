@@ -1,5 +1,9 @@
 """
 ### 1. RMS (Root Mean Square)
+The Root Mean Square (RMS) is a way to measure the 
+“effective magnitude” of a signal—especially when it
+varies over time (like AC voltage, sound waves, etc.).
+
 
 Definition:
 The RMS of a function x(t) over a period T is:
@@ -15,7 +19,8 @@ Example: AC current i(theta) = I * sin(theta), where I is the peak current
 3. Take the square root:
    i_rms = I / sqrt(2)
 
-Meaning: RMS value is the effective current that would produce the same heating effect as the AC current.
+Meaning: RMS value is the effective current that 
+would produce the same heating effect as the AC current.
 
 ### 2. Surface Area of Revolution
 

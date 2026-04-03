@@ -5,6 +5,10 @@
 
 # We can express exponentiation in terms of 
 # exponential and logarithmic functions using this property.
+# Terminalogy:
+# Exponentiation: “raise a number to a power” (a single result)
+# Exponential: “a function that grows/shrinks rapidly”
+
 
 # For any positive real number a > 0 and any real number b:
 #     a^b = exp(b * ln(a))
@@ -24,8 +28,9 @@
 
 # The identity a^b = exp(b * ln(a))
 # is not only a mathematical relationship 
-# but also the foundation for how computers and calculators compute
-# powers efficiently, especially when b is not an integer.
+# but also the foundation for how computers 
+# and calculators compute powers efficiently,
+# especially when b is not an integer.
 
 # Computational Insight
 
@@ -43,12 +48,15 @@
 
 # This process is mathematically valid and computationally 
 # efficient because exp() and ln() are core functions that
-# hardware and software math libraries implement with great precision.
+# hardware and software math libraries implement 
+# with great precision.
 
 # Advantages
-# Universality - Works for any real exponent b, including fractional or negative values.
-# Efficiency - CPUs and calculators use optimized low-level routines 
-# for exp() and ln(), making this faster than other methods.
+# Universality - Works for any real exponent b, 
+# including fractional or negative values.
+# Efficiency - CPUs and calculators use optimized 
+# low-level routines for exp() and ln(), 
+# making this faster than other methods.
 
 # Precision - Mathematical libraries use series expansions 
 # and iterative refinements to ensure accuracy.
@@ -74,4 +82,5 @@ print(power_via_identity(9, 0.5))  # Expected output: 3.0
 # Explanation:
 # - math.log(a) computes the natural logarithm ln(a)
 # - math.exp(x) computes e^x
-# - Multiplying b * math.log(a) and exponentiating gives the same result as a ** b
+# - Multiplying b * math.log(a) and exponentiating gives
+# the same result as a ** b

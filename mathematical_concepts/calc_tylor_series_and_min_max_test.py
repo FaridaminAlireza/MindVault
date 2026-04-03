@@ -1,5 +1,5 @@
 """
-SUMMARY: Derivatives, Taylor Series, and Min/Max Tests
+Notes on Derivatives, Taylor Series, and Min/Max Tests
 
 1) Are higher-order derivatives always smaller than lower-order ones?
 No. There is no general rule that the n-th derivative at a point is
@@ -22,21 +22,22 @@ If f''(x)<0, the point is a candidate for a local maximum.
 
 3) Is the third Taylor term always smaller than the second when f''(x)>0?
 No.
-- Second term magnitude: (f''(x)/2) h^2
+- Second term magnitude: (|f''(x)|/2) h^2
 - Third term magnitude: (|f'''(x)|/6) |h|^3
+- Ratio of third term to second term:
+≈ (f'''(a) / (3 * f''(a))) * h
+->
+Second term scales like h^2
+Third term scales like h^3
 The third term is smaller only when h is sufficiently small.
 This is why Taylor-based arguments are local: near the point,
 the quadratic term dominates, but not necessarily for larger h.
 
-4) What if the second derivative is zero?
-If:
-f'(a)=0
-f''(a)=0
-
-Then look for the first non-zero derivative of order n >= 3.
+4) What if the second derivative (f''(x)) is zero?
+If f'(a)=0 and f''(a)=0 Then 
+look for the first non-zero derivative of order n >= 3.
 
 Let n be the smallest integer such that f^(n)(a) != 0.
-
 Near a:
 f(a+h) - f(a) behaves like h^n multiplied by a constant.
 

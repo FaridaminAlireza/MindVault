@@ -25,7 +25,7 @@ If F'(x) = f(x), then ∫ f(x) dx = F(x) + C,
 where C is the constant of integration.
 
 ---
-BASIC INTEGRATION RULES WITH EXAMPLES
+BASIC INTEGRATION RULES
 
 1. Constant Rule
    ∫ c dx = c x + C
@@ -45,7 +45,8 @@ BASIC INTEGRATION RULES WITH EXAMPLES
    The integral of a sum is the sum of integrals.
    ∫ (f(x) + g(x)) dx = ∫ f(x) dx + ∫ g(x) dx
    Example:
-   ∫ (x^2 + 3x) dx = ∫ x^2 dx + ∫ 3x dx = (x^3 / 3) + (3x^2 / 2) + C
+   ∫ (x^2 + 3x) dx = ∫ x^2 dx + ∫ 3x dx =
+     (x^3 / 3) + (3x^2 / 2) + C
 
 5. Difference Rule
    ∫ (f(x) - g(x)) dx = ∫ f(x) dx - ∫ g(x) dx

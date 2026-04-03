@@ -148,8 +148,7 @@ This approximation is remarkably accurate for most ellipses encountered
 in practice.
 
 10. CONCLUSION
-
-The perimeter of an ellipse provides a fundamental example where
+ The perimeter of an ellipse provides a fundamental example where
 geometry, calculus, and special functions intersect. Using parametric
 equations and the Euclidean notion of distance, we obtain an exact
 integral formula for the arc length. Although the integral cannot be

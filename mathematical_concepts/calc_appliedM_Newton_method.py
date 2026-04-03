@@ -2,53 +2,46 @@
 
 # Newton's Method (also called the Newton-Raphson method) 
 # is an iterative technique for finding approximate roots 
-# of a real-valued function f(x). 
-# It is especially useful when analytical solutions are difficult
-# or impossible to obtain.
+# of a real-valued function f(x). It is especially useful 
+# when analytical solutions are difficult or impossible 
+# to obtain.
 
 # Approach
 # Given a function f(x) and its derivative f'(x),
-#  the Newton-Raphson iteration formula is:
+# the Newton-Raphson iteration formula is:
 
 #  x_{n+1} = x_n - f(x_n)/f'(x_n)
 
 # Here:
 # - x_n is the current approximation.
 # - x_{n+1} is the next, hopefully more accurate, approximation.
-# - The process is repeated until |x_{n+1} - x_n| 
-# is smaller than a specified tolerance.
+# - The process is repeated until |x_{n+1} - x_n| is smaller 
+# than a specified tolerance.
 # The convergance is proved through Taylor series expansion.
-
-
-# Ex. 
-# f'(x1) = f(x1) - (f(x2) = 0)  / x2-x1
-# f'(x1) x2 - f'(x1) x1 = f(x1)
-# x2 = (f(x1) - f'(x1) x1) / f'(x1)
-# x2 = x1 - f(x1) /f'(x1)
 
 
 # Derivation
 # The idea is to approximate f(x) near x_n using a tangent line:
 
-# The tagnent line to f(x) at x_n has the slope f'(x_n), and
-# passes through the point (x_n, f(x_n)).
+# The tagnent line to f(x) at x_n has the slope f'(x_n),
+# and passes through the point (x_n, f(x_n)).
 
 # The point-slope form of a line is: 
+
 # y−y0 ​= m(x−x0​) where
 #  m = f'(x_n),
 #  x_0 = x_n ,
 #  y_0 = f(x_n),
 #  y = f(x)
 # f(x) = f(x_n) + f'(x_n) (x - x_n)
-
 # f(x) ≈ f(x_n) + f'(x_n)(x - x_n)
-# Setting f(x) = 0 to find the root:
 
+# Setting f(x) = 0 to find the root:
 #  0 = f(x_n) + f'(x_n) (x_{n+1} - x_n)
 #  - f(x_n) = f'(x_n) (x_{n+1} - x_n)
 #  -f(x_n) /f'(x_n) = (x_{n+1} - x_n)
-
 #  x_{n+1} = x_n - f(x_n)/f'(x_n)
+
 # This gives the iterative formula used in Newton's Method.
 
 # Algorithm
@@ -74,21 +67,24 @@
 # Newton's iteration formula:
 #     x_{n+1} = x_n - f(x_n) / f'(x_n)
 
-# We want to show that x_n → α and find the rate of convergence.
+# We want to show that x_n → α and 
+# find the rate of convergence.
 
 # 1. Taylor Expansion of f(x_n)
 
 # Expand f(x_n) around α using Taylor's theorem:
 # f(x_n) = f(α) + f'(α)(x_n - α) + (1/2)f''(ξ_n)(x_n - α)^2
 # for some ξ_n between x_n and α.
+
 # Since f(α) = 0, this simplifies to:
-# f(x_n) = f'(α)(x_n - α) + (1/2)f''(ξ_n)(x_n - α)^2
+# f(x_n) = f'(α)(x_n - α) + (1/2)f''(ξ_n) (x_n - α)^2
 
 # 2. Substitute into Newton Iteration
 # The iteration is:
 #     x_{n+1} = x_n - f(x_n) / f'(x_n)
 # Subtract α from both sides:
 #     x_{n+1} - α = x_n - α - f(x_n)/f'(x_n)
+
 # Substitute f(x_n) from the Taylor expansion:
 # x_{n+1} - α = x_n - α - [ f'(α)(x_n - α) + (1/2)f''(ξ_n)(x_n - α)^2 ] / f'(x_n)
 # Simplify:
@@ -112,16 +108,17 @@
 # 5. Conditions Summary
 
 # Convergence is guaranteed if:
-# - f ∈ C² near α
+# - f ∈ C² near α 
+# (it’s a compact way of describing the smoothness of a function.
+#f is twice differentiable, and both  𝑓′and 𝑓′′ are continuous)
+
 # - f'(α) ≠ 0
 # - initial guess x₀ is sufficiently close to α
 
 # In summary, Newton’s method converges 
 # quadratically near a simple root.
-# That is:
-#     |x_{n+1} - α| ≤ C |x_n - α|²ßß
+# That is: |x_{n+1} - α| ≤ C |x_n - α|²
 # for some constant C > 0.
-
 
 def newton_method(f, f_prime, x0, tol=1e-7, max_iter=100):
     x = x0
@@ -138,14 +135,14 @@ def newton_method(f, f_prime, x0, tol=1e-7, max_iter=100):
     raise ValueError(
         "Did not converge within max_iter iterations")
 
-# Ex f(x)=x2−2=0
+# Ex f(x)=x^2−2=0
 f = lambda x: x**2 - 2
 f_prime = lambda x: 2*x
 
 root = newton_method(f, f_prime, x0=1)
 print("Root ≈", root)
 
-# f(x)=x3−x−2=0
+# f(x)=x^3−x−2=0
 f = lambda x: x**3 - x - 2
 f_prime = lambda x: 3*x**2 - 1
 
@@ -162,8 +159,6 @@ f_prime = lambda x: -math.sin(x) - 1
 root = newton_method(f, f_prime, x0=1)
 print("Root ≈", root)
 
-
-
 # Newton’s method doesn’t “find all roots” by itself —
 # it converges to one root depending on the starting point.
 
@@ -172,8 +167,7 @@ print("Root ≈", root)
 # showing which starting points lead to which root.
 
 
-#Ex f(x)=x4−1
-
+# Ex: f(x)=x^4−1
 # x^4 - 1 = (x^2 - 1)(x^2 + 1)
 # x^2 - 1 = (x - 1)(x + 1)
 # x^4 - 1 = (x - 1)(x + 1)(x^2 + 1)
@@ -193,13 +187,13 @@ def newton_method_complex(f, f_prime, x0, tol=1e-8, max_iter=100):
             return x_next
         x = x_next
     return x
-#  note: comparing floating-point numbers with == is unsafe 
-# — because of tiny precision errors (for fpx)
-# e1-12 effectively means “if the derivative is
-# effectively zero, stop before dividing
+
+# note: comparing floating-point numbers with == is unsafe 
+# because of tiny precision errors (for fpx)
+# e1-12 effectively means “if the derivative is effectively zero,
+# stop before dividing.
 
 import cmath
-
 f = lambda x: x**4 - 1
 f_prime = lambda x: 4*x**3
 

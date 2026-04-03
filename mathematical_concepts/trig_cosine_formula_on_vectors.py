@@ -21,4 +21,4 @@ The sides of the triangle have lengths:
 Applying the Law of Cosines to this triangle gives:
 
 |A − B|² = |A|² + |B|² − 2|A||B| cos(θ)
-"""
+""" 

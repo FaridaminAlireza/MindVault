@@ -37,6 +37,11 @@ Intuition for coefficient 4 of x^3y:
 - Matches all sequences: 
 (x,x,x,y), (x,x,y,x), (x,y,x,x), (y,x,x,x)
 
+- Choosing positions for x automatically determines
+positions for y.
+For ex, in (x + y)^5,​ C(5,3) and C(5,2) actually count the same thing.
+
+
 ---
 2. MULTINOMIAL THEOREM
 
@@ -64,8 +69,7 @@ Explanation:
 - Denominator removes overcounting of repeated variables
 
 Example: (x + y + z)^2
-
-- Tuples |α|=2: 
+- Tuples: 
 (2,0,0), (1,1,0), (1,0,1), (0,2,0), (0,1,1), (0,0,2)  
 - Terms: x^2, 2xy, 2xz, y^2, 2yz, z^2  
 - Expansion: x^2 + y^2 + z^2 + 2xy + 2xz + 2yz
@@ -76,6 +80,93 @@ Example: (x + y + z)^2
 General formula:
 
  Coefficient of x1^k1 x2^k2 ... xm^km = n! / (k1! k2! ... km!)
+
+Method 1:
+Derivation of the formula by Sequential Choosing:
+
+We want to count the number of ways to form the term
+x1^k1 x2^k2 ... xm^km
+
+Step 1: Choose positions for x1
+Number of ways = C(n, k1)
+
+Step 2: Choose positions for x2
+Number of ways = C(n − k1, k2)
+
+Step 3: Choose positions for a3
+Number of ways = C(n − k1 − k2, k3)
+
+Continue this process 
+until all variables are assigned.
+
+Final count (multiply all steps):
+C(n, k1) × C(n − k1, k2) × 
+C(n − k1 − k2, k3) × ... × C(k_m, k_m)
+
+Simplified result:
+n! / (n1! n2! ... nk!)
+
+
+Method 2: Instead of sequential choosing, 
+think of the arrangements of the terms:
+
+For example for (a+b+c)^5
+for taking 2 a , 2 b and 1 c:
+
+a a b b c → total permutations = 5!
+
+But:
+
+swapping a’s doesn’t change anything → divide by 2!
+swapping b’s → divide by 2!
+c is single → divide by 1!
+
+So 5!/2!
+
+​This automatically includes all possible “orders” of picking
+
+The resulted enumeration: 
+Take positions 1 2 3 4 5. 
+Two a’s, two b’s, one c. 
+Let’s enumerate all distinct sequences 
+(not labeling a’s and b’s individually):
+
+a a b b c
+a a b c b
+a a c b b
+a b a b c
+a b a c b
+a b b a c
+a b b c a
+a b c a b
+a b c b a
+a c a b b
+a c b a b
+a c b b a
+b a a b c
+b a a c b
+b a b a c
+b a b c a
+b a c a b
+b a c b a
+b b a a c
+b b a c a
+b b c a a
+b c a a b
+b c a b a
+b c b a a
+c a a b b
+c a b a b
+c a b b a
+c b a a b
+c b a b a
+c b b a a
+
+There are exactly 30 distinct sequences, 
+matching the multinomial formula.
+Notice how swapping the a’s in any of these sequences 
+does not create a new one, and similarly for b’s.
+
 
 Intuition:
 
@@ -98,15 +189,15 @@ Example: (x + y + z + w)^4, term x^2 y z
 ---
 4. COUNTING NUMBER OF REPETITIONS
 
-- Coefficient counts **how many times a term appears** in the expansion  
+- Coefficient counts how many times a term appears in the expansion  
 - Binomial case: (x+y)^n, term x^k y^(n-k) → choose k positions for x → C(n,k)  
 - Multinomial: choose k1 positions for x1, k2 for x2, ..., 
 last variable determined by remaining slots → multiply choices
 
 Rule of Product:
 
-- If there are multiple sequential independent choices, 
-multiply the number of ways for each choice
+- If there are multiple sequential independent choices,
+multiply the number of ways for each choice:
 
 - Example: x^2 y z in (x+y+z)^4:
     - Choose 2 slots for x → 6 ways  
@@ -152,89 +243,5 @@ Example: (x + y + z)^3, n=3, m=3
 - Binomial theorem is a special case of multinomial theorem (m=2)  
 - Visualizing “slots” for each variable helps understand 
 coefficients and terms  
-
----
-MULTINOMIAL THEOREM (more details)
-
-The multinomial theorem generalizes the binomial theorem 
-to more than two terms.
-
-For m terms x1, x2, ..., xm raised to the power n:
-
-    (x1 + x2 + ... + xm)^n
-
-The expansion gives all possible products of the variables
-where the exponents sum to n.
-
-Formally:
-
- (x1 + x2 + ... + xm)^n =
- Σ_{k1+k2+...+km=n} [n! / (k1! k2! ... km!) * x1^k1 x2^k2 ... xm^km]
-
-Where:
-- k1, k2, ..., km ≥ 0
-- n! / (k1! k2! ... km!) is the multinomial coefficient
-
-2. Step-by-step intuition:
-
-1. Start from the product form:
-
- (x1 + x2 + ... + xm)^n = 
- (x1 + ... + xm)(x1 + ... + xm) ... (n times)
- Each term in the expansion comes from
- choosing one variable from each factor.
-
-2. Identify the pattern for a term x1^k1 x2^k2 ... xm^km:
-
-- Pick x1 from exactly k1 of the n factors
-- Pick x2 from exactly k2 of the n factors
-- ...
-- Pick xm from exactly km factors
-- The sum k1 + k2 + ... + km = n
-
-3. Count how many ways to do this:
-
-- The number of ways to choose k1 positions
- for x1, k2 positions for x2, etc.:
-
-    n! / (k1! k2! ... km!)
-
-4. Combine term and coefficient:
-
-- Multiply multinomial coefficient by 
-the product of variables raised to their powers:
-
-    term = (n! / (k1! k2! ... km!)) * x1^k1 x2^k2 ... xm^km
-
-- Repeat for all combinations of k1, ..., km with sum = n
-
-3. Example: (x + y + z)^3
-
-1. Identify n = 3, m = 3 (variables x, y, z)
-2. Find all combinations of non-negative integers
- k1, k2, k3 such that k1+k2+k3 = 3:
-
-- (3,0,0), (0,3,0), (0,0,3)
-- (2,1,0), (2,0,1), (1,2,0), (0,2,1), (1,0,2), (0,1,2)
-- (1,1,1)
-
-3. Compute multinomial coefficients:
-
-- (3,0,0): 3!/3!0!0! = 1 → x^3
-- (0,3,0): 1 → y^3
-- (0,0,3): 1 → z^3
-- (2,1,0): 3 → 3 x^2 y
-- (2,0,1): 3 → 3 x^2 z
-- (1,2,0): 3 → 3 x y^2
-- (0,2,1): 3 → 3 y^2 z
-- (1,0,2): 3 → 3 x z^2
-- (0,1,2): 3 → 3 y z^2
-- (1,1,1): 6 → 6 x y z
-
-4. Combine all terms:
-
-(x + y + z)^3 = 
-x^3 + y^3 + z^3 +
-3x^2y + 3x^2z + 3xy^2 + 3y^2z + 3xz^2 + 3yz^2 + 6xyz
 
 """

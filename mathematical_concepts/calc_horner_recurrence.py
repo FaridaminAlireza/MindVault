@@ -1,5 +1,6 @@
 """
-Horner's method — the recurrence computers actually use to evaluate a polynomial
+Horner's method — 
+the recurrence, computers actually use to evaluate a polynomial
 
 You wrote a polynomial like
 f(x) = a_n x^n + a_{n-1} x^{n-1} + ... + a_1 x + a_0.
@@ -45,30 +46,31 @@ Then 6 + (-5) = 1. So b_3 = 1.
 3. b_2 = b_3 * 2 + a_2 = 1*2 + 0 = 2. So b_2 = 2.
 4. b_1 = b_2 * 2 + a_1 = 2*2 + 2 = 6. So b_1 = 6.
 5. b_0 = b_1 * 2 + a_0 = 6*2 + (-1) = 11. So b_0 = 11.
-   Therefore f(2) = 11.
+Therefore f(2) = 11.
 
 You can check by expanding: 3*2^4 - 5*2^3 + 0 + 2*2 - 1 =
 48 - 40 + 0 + 4 - 1 = 11.
 
 Notes
 
-* Efficiency: Horner uses O(n) operations (n multiplies, n adds).
+* Efficiency: 
+Horner uses O(n) operations (n multiplies, n adds).
 Naively computing powers separately can cost much more.
-* Numerical stability: Horner is generally better
-than naive power evaluation,
+* Numerical stability: 
+Horner is generally better than naive power evaluation,
 but floating-point rounding and cancellation
 can still cause errors for ill-conditioned inputs.
 * Works for derivatives too (see next section).
 * Integer vs floating point: for exact integer results,
-use integers with
-sufficient width (big integers) to avoid overflow.
+use integers with sufficient width (big integers) 
+to avoid overflow.
 
 Short Python implementation (plain text)
 def horner_eval(coeffs, x):
-# coeffs is [a_n, a_{n-1}, ..., a_0]
-result = coeffs[0]           # a_n
-for a in coeffs[1:]:
-result = result * x + a
+   # coeffs is [a_n, a_{n-1}, ..., a_0]
+   result = coeffs[0]           # a_n
+   for a in coeffs[1:]:
+      result = result * x + a
 return result
 
 # Example
@@ -80,10 +82,11 @@ print(horner_eval(coeffs, 2))  # prints 11
 
 1. Computing f'(x) alongside f(x) with almost no extra work
 
-You can compute f(x) and f'(x) in a single pass through the coefficients using
-a small companion recurrence (often called synthetic differentiation).
+You can compute f(x) and f'(x) in a single pass
+through the coefficients using a small companion
+recurrence (often called synthetic differentiation).
 The idea: while you form the Horner sequence for f,
- maintain a second accumulator that builds the derivative.
+maintain a second accumulator that builds the derivative.
 
 Let coefficients be a_n, a_{n-1}, ..., a_0
 and let x be the evaluation point.
@@ -103,7 +106,7 @@ Explanation / derivation sketch:
 
 * b implements the usual Horner recurrence: b_k = b_{k+1} * x + a_k.
 * c accumulates sums of the b_{k+1} terms in the pattern that yields
-the derivative; algebraically this corresponds to differentiating
+the derivative; algebraically this corresponds to differentiating 
 the nested Horner form.
 
 Worked example (same polynomial as above)
@@ -140,13 +143,13 @@ f'(2) = 12*8 - 15*4 + 2 = 96 - 60 + 2 = 38  (matches)
 
 Simple Python implementation that returns both:
 def horner_with_derivative(coeffs, x):
-# coeffs = [a_n, a_{n-1}, ..., a_0]
-b = coeffs[0]   # a_n
-c = 0.0
-for a in coeffs[1:]:
-c = c * x + b
-b = b * x + a
-return b, c   # (f(x), f'(x))
+   # coeffs = [a_n, a_{n-1}, ..., a_0]
+   b = coeffs[0]   # a_n
+   c = 0.0
+   for a in coeffs[1:]:
+   c = c * x + b
+   b = b * x + a
+   return b, c   # (f(x), f'(x))
 
 ---
 
@@ -176,7 +179,8 @@ x = 1
 
 Step-by-step using double-precision semantics
 (rounded at each operation):
-b = a_2 = 1e20
+b = a_2 = 1e20 
+(1e20=1×1020)
 b = b * x + a_1 = 1e20 * 1 + 1 -> computed as 1e20
 (the +1 is lost to rounding)
 b = b * x + a_0 = 1e20 * 1 + (-1e20) -> = 0
@@ -192,9 +196,9 @@ A small Python demonstration
 a standard Python shell using IEEE doubles):
 coeffs = [1e20, 1.0, -1e20]   # a_2, a_1, a_0
 def horner_eval(coeffs, x):
-r = coeffs[0]
-for a in coeffs[1:]:
-r = r*x + a
+   r = coeffs[0]
+   for a in coeffs[1:]:
+   r = r*x + a
 return r
 
 print(horner_eval(coeffs, 1.0))   
@@ -217,10 +221,10 @@ getcontext().prec = 50
 coeffs = [Decimal('1e20'),
 Decimal('1'), Decimal('-1e20')]
 def horner_decimal(coeffs, x):
-r = coeffs[0]
-for a in coeffs[1:]:
-r = r * x + a
-return r
+   r = coeffs[0]
+   for a in coeffs[1:]:
+   r = r * x + a
+   return r
 
 print(horner_decimal(coeffs, Decimal('1'))) 
 # prints Decimal('1')

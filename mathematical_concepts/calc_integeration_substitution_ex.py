@@ -1,22 +1,20 @@
 """
 
-SUBSTITUTION EXAMPLE FOR INTEGRALS WITH sqrt(a^2 - x^2)
+SUBSTITUTION EXAMPLE 
+FOR INTEGRALS WITH sqrt(a^2 - x^2)
 
 1. Recognizing the pattern
 
 When an integral contains:
-
 sqrt(a^2 - x^2)
 
 this matches the trigonometric identity:
-
 sin^2(theta) + cos^2(theta) = 1
 
 Rewriting:
 1 - sin^2(theta) = cos^2(theta)
 
 So we choose the substitution:
-
 x = a * sin(theta)
 
 ---
@@ -48,15 +46,15 @@ sqrt(a^2 - x^2)
 = a * cos(theta)
 
 ---
+4. Rewrite the integral ∫ sqrt(a^2 - x^2) dx
 
-4. Rewrite the integral
-
-∫ sqrt(a^2 - x^2) dx
+* sqrt(a^2 - x^2) = a * cos(theta)
+* dx = a * cos(theta) dtheta
+* ∫ sqrt(a^2 - x^2) dx 
 = ∫ (a * cos(theta)) * (a * cos(theta) dtheta)
 = ∫ a^2 * cos^2(theta) dtheta
 
 ---
-
 5. Simplify the integral
 
 Use the identity:
@@ -93,11 +91,13 @@ sin(2theta) = 2x * sqrt(a^2 - x^2) / a^2
 
 7. Final answer
 
-∫ sqrt(a^2 - x^2) dx
-= (x/2) * sqrt(a^2 - x^2)
+Replacing in the result:
+- sin(2theta) = 2x * sqrt(a^2 - x^2) / a^2
+- theta = arcsin(x / a)
 
-* (a^2/2) * arcsin(x / a)
-* C
+∫ sqrt(a^2 - x^2) dx
+= (a^2 / 2) * (theta + sin(2theta)/2) + C
+= (a^2 / 2) * arcsin(x/a) + (x/2) * sqrt(a^2 - x^2) + C
 
 ---
 
@@ -138,7 +138,6 @@ cosh^2(t) - 1 = sinh^2(t)
 2. When to use each substitution
 
 If the integrand contains:
-
 sqrt(x^2 + a^2)  ->  x = a * sinh(t)
 sqrt(x^2 - a^2)  ->  x = a * cosh(t)
 

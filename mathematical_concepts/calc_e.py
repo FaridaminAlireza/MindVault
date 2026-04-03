@@ -1,5 +1,5 @@
 """
-the number e
+The number e
 * what the exponential series is,
 * why it converges,
 * what number e is,
@@ -18,7 +18,8 @@ The exponential function and the number e.
    so the exponential function is defined everywhere.
 
 2. Proof of convergence.
-   Consider a_n = x^n / n!. Apply the ratio test:
+   Consider a_n = x^n / n!. 
+   Apply the ratio test:
    |a_{n+1}| / |a_n| = |x| / (n+1).
    As n goes to infinity, |x|/(n+1) goes to 0, 
    which is less than 1. Therefore the series converges
@@ -54,7 +55,14 @@ The exponential function and the number e.
    For n >= 1, n! >= 2^(n-1), 
    so 1/n! <= 1/2^(n-1).
    Therefore the tail after N satisfies
-   R_N = sum_{n=N+1 to infinity} 1/n! <= sum_{n=N+1 to infinity} 1/2^(n-1) = 1/2^(N-1).
+   R_N = 
+   sum_{n=N+1 to infinity} 1/n! <= 
+   sum_{n=N+1 to infinity} 1/2^(n-1) = 1/2^(N-1).
+   (The geometric series formula used is:
+    sum_{k=0 to infinity} r^k = 1 / (1 - r),
+    for |r| < 1
+    In this case, r = 1/2.)
+
    Thus S_10 approximates e within about 1/512.
 
 6. Is this how e was originally defined?
@@ -90,7 +98,8 @@ which matches the power series definition.
 (4) Logarithmic definition.
 Some approaches define the natural logarithm first by
 ln(x) = integral from 1 to x of dt/t,
-and then define e as the unique number such that ln(e) = 1.
+and then define e as the unique number 
+such that ln(e) = 1.
 
 All these definitions produce the same number.
 
@@ -108,33 +117,24 @@ Thus all definitions agree.
 
 9. Important properties of e.
 
-(1) exp(x) = sum x^n/n! for all real or complex x.
-
-(2) exp'(x) = exp(x).
-
-(3) exp(0) = 1.
-
-(4) exp(x+y) = exp(x) exp(y). 
-This can be proved using the power series 
-expansion or the differential equation.
-
-(5) exp(-x) = 1/exp(x).
-
-(6) The function exp(x) is strictly 
-increasing and continuous on the real line.
-
-(7) The inverse function of exp(x) 
-is the natural logarithm ln(x).
-
-(8) e is irrational; 
-its decimal expansion never repeats.
-
-(9) e is transcendental;
- it is not the root of any nonzero
- algebraic polynomial with integer coefficients.
-
-(10) exp(x) is entire, 
-meaning analytic on the whole complex plane.
+   (1) exp(x) = sum x^n/n! for all real or complex x.
+   (2) exp'(x) = exp(x).
+   (3) exp(0) = 1.
+   (4) exp(x+y) = exp(x) exp(y). 
+   This can be proved using the power series 
+   expansion or the differential equation.
+   (5) exp(-x) = 1/exp(x).
+   (6) The function exp(x) is strictly 
+   increasing and continuous on the real line.
+   (7) The inverse function of exp(x) 
+   is the natural logarithm ln(x).
+   (8) e is irrational; 
+   its decimal expansion never repeats.
+   (9) e is transcendental;
+   it is not the root of any nonzero
+   algebraic polynomial with integer coefficients.
+   (10) exp(x) is entire, 
+   meaning analytic on the whole complex plane.
 
 10. Summary.
 The number e can be defined in several equivalent ways:

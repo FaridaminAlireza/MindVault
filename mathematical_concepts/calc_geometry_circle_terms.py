@@ -14,19 +14,19 @@ Segment:(has two meanings)
 A straight part of a line connecting two points
 Example: a radius is a line segment
 from the center to the circle
-2) Circular Segment (Circle Geometry Meaning)
+2) Circular Segment (Circle Geometry)
 A region/area inside a circle bounded 
 by a chord and the arc above it
 
 Arc: A continuous part of the circle’s circumference.
-Chord: A segment with both endpoints on the circle.
+Chord: A line segment with both endpoints on the circle.
 
 Sector: A region bounded by two radii (plural radius)
 and the connecting arc.
 
 Segment: A region bounded by a chord and its arc.
 
-Radius (r): A segment from the center to the circle.
+Radius (r): A line segment from the center to the circle.
 
 Diameter (d): A chord passing through the center (d = 2r).
 
@@ -60,26 +60,48 @@ if it is an isosceles trapezoid.)
 
 
 FORMULAS
-Radius, Diameter: d = 2r
-Circumference: C = 2πr  or  C = πd
-Area of Circle: A = πr²
+
 Arc Length (when angle is θ in degrees): Arc Length = (θ/360) × 2πr
 Arc Length (when angle is θ in radians): Arc Length = θr
 Area of Sector (degrees): Sector Area = (θ/360) × πr²
 Area of Sector (radians): Sector Area = (1/2)r²θ
-Area of Segment: Segment Area = 
-Sector Area − Triangle Area (specific triangle formula depends on chord)
-Power of a Point (Chord form): (PA × PB) = (PC × PD)
-Power of a Point (Tangent–Secant): (Tangent length)² = 
-(External secant part × Entire secant)
+Area of Segment: 
+Segment Area =  Sector Area − Triangle Area 
+(specific triangle formula depends on chord)
+
+Power of a Point (Chord form):
+Often known as the Intersecting Chords Theorem,
+states that if two chords AB and CD intersect at a point P
+inside a circle, the product of the lengths of the segments
+of one chord equals the product of the lengths of 
+the segments of the other. 
+PA × PB = PC × PD
+
+Power of a Point (Tangent–Secant): 
+If a tangent (touching the circle at point T) and
+a secant (with touching points B and A) 
+are drawn from a point P outside a circle,
+the square of the tangent’s length equals 
+the product of the lengths of the secant’s segments.
+(Tangent length)² = (External secant part × Entire secant)
+PT^2 = PA × PB
 
 ANGLE RELATIONSHIPS
-Inscribed Angle Theorem: Inscribed angle = 1/2 × intercepted arc.
+Inscribed Angle Theorem: 
+Inscribed angle = 1/2 × intercepted arc.
+The measure of an angle inscribed in a circle is exactly
+half the measure of its intercepted arc. 
+This means if an angle's vertex lies on the circle 
+and its sides are chords, the angle is 1/2
+the degree measure of the arc in its interior
+
 
 Central vs Inscribed: 
-Central angle = 2 × inscribed angle intercepting the same arc.
+Central angle = 
+2 × inscribed angle intercepting the same arc.
 
-Angles in the Same Segment: Angles standing on the same arc are equal.
+Angles in the Same Segment: 
+Angles standing on the same arc are equal.
 
 Angle in a Semicircle: Always 90°.
 
@@ -92,11 +114,12 @@ Exterior angle equals interior opposite angle.
 
 TANGENTS
 Tangent forms a 90° angle with the radius at point of contact.
-Two tangents from the same external point are equal in length.
-"""
+Two tangents from the same external point are equal in length. This is a
+fundamental circle theorem. If a point P outside a circle connects 
+to tangent points A and B on the circumference, the lengths PA and PB 
+are identical
 
 
-"""
 # PROOF OF AREA OF A CIRCLE USING INTEGRATION
 
 We want to find the area of a circle of radius r.
