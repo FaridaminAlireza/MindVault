@@ -21,4 +21,3 @@
   - Cognitive Behavioural Therapy (Elaine Iljon Foreman)
   - Atomic habbits (James Clear)
   - Clear thinking (Shane Parrish)
-  - Rich dad poor dad (Robert T.Kiyosaki)
