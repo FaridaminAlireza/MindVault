@@ -17,7 +17,7 @@ eq2) area of △ ABC =  1/2 (sin C * b) * a
 
 Now from vertx B draw a vertical line
 that intercepts the base b or its extent.
-call the interception point as E and BD as h2.
+call the interception point as E and BE as h2.
 
 Sin A =  h2 /c -> h2 = sin A * c
 eq3) area of △ ABC =  1/2 (sin A * c) * b

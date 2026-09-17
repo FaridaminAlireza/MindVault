@@ -36,18 +36,18 @@ Proof of Dot Product Formula:
 
 From the Law of Cosines in a triangle 
 formed by A, B, and A−B:
-|A − B|² = |A|² + |B|² − 2|A||B|cos(θ)
+  |A − B|² = |A|² + |B|² − 2|A||B|cos(θ)
 
-Alternative (algebraic) derivation using the dot product:
+Or Alternative (algebraic) derivation using the dot product:
 Start with the vector expression:
-|A − B|² = (A − B) · (A − B)
-Expand the dot product:
-(Note that dot product is commutative.)
-|A − B|² = A · A + B · B − 2A · B
-Since the dot product of two vectors satisfies 
-A · B = |A||B| cos(θ), we can substitute:
+  |A − B|² = (A − B) · (A − B)
+  Expand the dot product:
+  (Note that dot product is commutative.)
+  |A − B|² = A · A + B · B − 2A · B
+  Since the dot product of two vectors satisfies 
+  A · B = |A||B| cos(θ), we can substitute:
 
-|A − B|² = |A|² + |B|² − 2|A||B| cos(θ)
+  |A − B|² = |A|² + |B|² − 2|A||B| cos(θ)
 
 
 Expanding the left-hand side using components:
@@ -79,6 +79,10 @@ A × B = |A||B|sin(θ) n̂
                
 Component Formula:
 A × B = [(A_yB_z - A_zB_y), (A_zB_x - A_xB_z), (A_xB_y - A_yB_x)]
+
+---
+B × A = − (A × B)
+---
 
 Example:
 A = [3, 4, 0], B = [4, 0, 0]
@@ -138,11 +142,6 @@ Area of parallelogram = 2A = a * b * sin(θ)
 Hence, the product a * sin(θ) * b represents the area of the parallelogram
 formed by the two vectors — while (1/2) a * b * sin(θ) represents the area
 of the triangle enclosed by them.
-
-Therefore:
-(1/4) a * sin(θ) * b = (1/4) × (area of the perpendicular triangle)
-and hence, the full product corresponds to: a * sin(θ) * b
-
 
 ---
 Proof of the Cross Product Formula by Intuition
@@ -239,12 +238,6 @@ In 3D:
 The determinant of three vectors gives
  the signed volume of the parallelepiped they form.
 
-Hence, if we want a vector that represents 
-the oriented area of the parallelogram formed by A and B,
-each of its components must correspond to 
-a signed area projection of that parallelogram
-onto one of the coordinate planes (XY, YZ, ZX).
-
 ---
 Constructing the Cross Product from Projections
 
@@ -255,6 +248,7 @@ Consider the three coordinate planes:
 - On the XY-plane: the projected area has value (A_xB_y − A_yB_x)
 
 These are precisely the components of the cross product!
+(Each component is perpendicular to a coordinate plane (xy, yz, zx))
 
 So, the vector:
 A × B = (A_yB_z − A_zB_y,  A_zB_x − A_xB_z,  A_xB_y − A_yB_x)
@@ -297,11 +291,12 @@ we use the scalar triple product:
 
 V = | A . (B × C)|
 
-First, ((B × C)) gives a vector perpendicular to the base (spanned by (B and C)
-with magnitude equal to the base area. Then, dotting it with (A) projects (A)
-onto the perpendicular direction, effectively giving the height of the 
-parallelepiped relative to that base. Multiplying the base area by 
-this height gives the volume.
+First, ((B × C)) gives a vector perpendicular to the base 
+(spanned by (B and C) with magnitude equal to the base area.
+Then, dotting it with (A) projects (A) onto the perpendicular
+direction, effectively giving the height of the 
+parallelepiped relative to that base. 
+Multiplying the base area by this height gives the volume.
 
 3. Connecting Projected Areas to Volume
 
@@ -315,14 +310,5 @@ are exactly the projected areas of (B × C) onto the (yz, xz, xy) planes.
 * The dot product multiplies each projected area by the corresponding component of (A),
  summing their contributions.
 * This weighted sum gives the total volume of the parallelepiped.
-
-In short:
-
-* Cross product → gives base area vector, pointing perpendicular to the base.
-* Dot with a vector → multiplies by height along that perpendicular direction.
-* Result → volume of the parallelepiped.
-* The “projected areas” are exactly the pieces that,
-when weighted by the components of the third vector and summed,
-produce the 3D volume.
 
 """

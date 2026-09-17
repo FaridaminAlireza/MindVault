@@ -118,5 +118,4 @@ These skills are important for:
 • Solving trigonometric equations
 • Simplifying expressions
 • Advanced mathematics and physics applications
-
 """

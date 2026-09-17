@@ -6,6 +6,7 @@ A principal angle
 is the smallest positive angle 
 measured from the positive x-axis 
 to a given ray in standard position.
+
 In standard trigonometry,
 angles can have infinitely many 
 equivalent rotations because 
@@ -41,13 +42,9 @@ every 360° or 2π.
 cos(θ + 2π) = cosθ and 
 sin(θ + 2π) = sinθ 
 (periodicity of sine and cosine)
-
 Thus, adding multiples of a full rotation
 does not change the position of
 the terminal side.
-Example:
-Coterminal angles of 45°:
-..., -675°, -315°, 45°, 405°, 765°, ...
 
 3. Periodicity Rules
 
@@ -180,8 +177,7 @@ sin(π/2 − 30°) = sin(60°)
 Rule 2: sin(π/2 + θ) = cosθ
 Proof:
 Angle (π/2 + θ) puts the angle in Quadrant II.
-Coordinates: 
-(cos(π/2 + θ), sin(π/2 + θ)) = (−sinθ, cosθ)
+Coordinates: (−sinθ, cosθ)
 So sin(π/2 + θ) = cosθ.
 
 But note sign check:
@@ -248,23 +244,8 @@ cos(π/2 + θ) = −sinθ
 cos(π − θ) = −cosθ
 cos(π + θ) = −cosθ
 
----
+--
 
-Examples
-1. Evaluate sin(π − 40°)
-sin(π − θ) = sinθ → sin(180° − 40°) = sin40°
-
-2. Evaluate cos(π/2 + 55°)
-cos(π/2 + θ) = −sinθ → cos(145°) = −sin55°
-
-3. Evaluate sin(π + 20°)
-sin(π + θ) = −sinθ → sin200° = −sin20°
-
-4. Evaluate cos(π − 30°)
-cos(180° − 30°) = −cos30° = −√3/2
-
-
----
 When θ > 90° in the expression sin(π/2 + θ):
 • π/2 + θ becomes greater than 180°
 • That means the resulting angle lies 
@@ -280,28 +261,5 @@ sin(π/2 + θ) = cosθ
 But since θ > 90° often puts cosθ
 in a negative region, 
 the result becomes negative.
-
-Example 1:
-Let θ = 100°
-π/2 + 100° = 
-90° + 100° = 190° (Quadrant III)
-sin(190°) = cos(100°)
-cos(100°) is negative
-So sin(190°) is negative.
-
-Numerical values:
-cos(100°) ≈ -0.1736
-sin(190°) ≈ -0.1736
-→ They match.
-
-Example 2:
-θ = 120°
-π/2 + 120° = 210° (Quadrant III again)
-sin(210°) = cos(120°)
-both are negative
-
-So the key idea: When θ > 90°,
-cosθ becomes negative → therefore 
-sin(π/2 + θ) becomes negative too.
 
 """

@@ -85,8 +85,8 @@ eliminate entries below it in that column.
 a matrix into row echelon form 
 (upper triangular form).
 * The determinant of a matrix equals 
-the product of its pivots, 
-up to sign changes if rows are swapped.
+the product of its pivots, up to sign changes
+if rows are swapped.
 * For triangular matrices, 
 no row swaps are needed, so 
 the determinant = product of diagonal elements.

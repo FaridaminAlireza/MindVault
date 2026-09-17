@@ -1,7 +1,6 @@
 """
 Determinant in 3D and Its Geometric Meaning
 
-
 1. Setup: Three vectors in 3D
 
 Let three vectors in 3D be:
@@ -102,7 +101,5 @@ with magnitude equal to the area of the base parallelogram.
 - 2D: 2×2 determinant → signed area of parallelogram  
 - 3D: 3×3 determinant → signed volume of parallelepiped  
 - nD: n×n determinant → signed hypervolume of n-dimensional parallelepiped  
-- Cross product in 3D is essentially a vector-valued determinant, capturing
- perpendicular direction and area.  
-
+  
 """

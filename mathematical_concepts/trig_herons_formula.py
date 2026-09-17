@@ -29,7 +29,7 @@ sin^2 A =
 =  ( ( (b + c) + a) ( (b + c) - a)   (a + (b-c) )(a - (b-c) ) 
     ) / 4 b^2c^2
 
-=  ( (b + c + a)(b + c - a)(a + b - c )(a - b - c) ) / 4 b^2c^2
+=  ( (b + c + a)(b + c - a)(a + b - c )(a - b + c) ) / 4 b^2c^2
 
 =  ( 2s (2(s-a))(2(s-c))(2(s-b)) ) / 4 b^2c^2
 
@@ -40,7 +40,7 @@ Since  △ ABC = 1/2 b c sin A
 △ ABC = 1/2 bc sin A 
 = 1/2 bc * sqrt(( 4s (s-a)(s-c)(s-b) ) / b^2c^2)
 = 1/2 bc * sqrt( 4s (s-a)(s-c)(s-b) ) / bc
-=  sqrt( s (s-a)(s-c)(s-b) ) 
+= sqrt( s (s-a)(s-c)(s-b) ) 
 
 -> △ ABC = sqrt( s(s-a)(s-c)(s-b) ) 
 

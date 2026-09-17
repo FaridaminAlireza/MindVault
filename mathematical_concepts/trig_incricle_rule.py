@@ -2,9 +2,9 @@
 The incricle of △ ABC
 is a circle that lies inside the triangle ABC
 and touches each side of triangle.
+
 Let denote the center as O
 and radius this traingle as r
-
 Let draw prependiculars from O 
 to the sides of the tirangle
 and call the intercepted points 
