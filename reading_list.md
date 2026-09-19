@@ -1,6 +1,8 @@
-Some favourite books that I read:
+The books that I read:
 
-- Mathametics
+- Mathematics
+  - Digital Image Processing, Gonzalez & Woods (Chapters 2, 3, 4, 10, 11)
+  - Signals & Systems, Oppenheim & Willsky (Chapters 1, 2, 4, 5, 7)
   - Modern Engineering Mathematics, Glyn James
   - A Modern Introduction to Probability and Statistics, FM Dekking
   - Chapters from Linear Algebra with Applications, Custom Binding UOttawa
