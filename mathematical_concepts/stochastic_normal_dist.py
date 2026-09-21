@@ -589,9 +589,3 @@ which is easy to solve using polar coordinates.
    → separating variables allows conversion
      to a double integral.
 """
-
-
-"""
-
-
-"""
