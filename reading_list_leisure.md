@@ -24,4 +24,3 @@
   - Book of longing (Leonard Cohen)
   - Cognitive Behavioural Therapy (Elaine Iljon Foreman)
   - Atomic habbits (James Clear)
-  - Clear thinking (Shane Parrish)
