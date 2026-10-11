@@ -7,6 +7,7 @@
   - The Murder of Roger Ackroyd (Agatha Christie)
   - Chronicle of a Death Foretold (Gabriel Garcia Marquez)
   - A chrismas carol (Charles Dickens)
+  - Around the World in Eighty Days (Jules Verne)
   - Can Socialists be happy? (Goerge Orwell)
   - Animal farm (Goerge Orwell)
   - The call of the wild (Jack London)
